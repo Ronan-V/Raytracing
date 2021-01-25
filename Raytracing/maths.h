@@ -23,9 +23,7 @@ Vector3D NormalizedVector(const Vector3D& vector)
 	float norm = GetNorme(vector);
 	if (norm != 0)
 	{
-		normalizedVector.x = vector.x / norm;
-		normalizedVector.y = vector.y / norm;
-		normalizedVector.z = vector.z / norm;
+		normalizedVector = DivideVector(norm, vector);
 	}
 	else
 	{
@@ -43,8 +41,8 @@ Vector3D VectorProduct(const Vector3D& vector1, const Vector3D& vector2) // MA *
 {
 	Vector3D resultedVector;
 	resultedVector.x = vector1.y * vector2.z - vector1.z * vector2.y;
-	resultedVector.x = vector1.z * vector2.x - vector1.x * vector2.z;
-	resultedVector.x = vector1.x * vector2.y - vector1.y * vector2.x;
+	resultedVector.y = vector1.z * vector2.x - vector1.x * vector2.z;
+	resultedVector.z = vector1.x * vector2.y - vector1.y * vector2.x;
 	return resultedVector;
 }
 
@@ -56,6 +54,15 @@ Vector3D FactorizeVector(float factor, const Vector3D& vector) // x * MA
 	factorizedVector.y = vector.y * factor;
 	factorizedVector.z = vector.z * factor;
 	return factorizedVector;
+}
+
+Vector3D DivideVector(float quotient, const Vector3D& vector)
+{
+	Vector3D dividedVector;
+	dividedVector.x = vector.x / quotient;
+	dividedVector.y = vector.y / quotient;
+	dividedVector.z = vector.z / quotient;
+	return dividedVector;
 }
 
 Vector3D SoustractVectors(const Vector3D& vector1, const Vector3D& vector2)
@@ -92,6 +99,9 @@ Vector3D RefractedRay(const Vector3D& incidentVector, const Vector3D& normalVect
 	Vector3D NormNormal = NormalizedVector(normalVector);
 	float NormScalar = ScalarProduct(NormInci, NormNormal);
 	float CosTeta = Scalar / NormScalar;
-	float Teta = acos(CosTeta) * 180 / 3.141;
-	float Teta2 = Re
-
+	float Teta1 = acos(CosTeta);
+	float Teta2 = RefractiveIndexN1 * sin(Teta1) / RefractiveIndexN2;
+	Vector3D RefractedRayD2 = NewVector(incidentVector.x * RefractiveIndexN1 / RefractiveIndexN2 + (RefractiveIndexN1 / RefractiveIndexN2 * cos(Teta1) - cos(Teta2)) * normalVector.x,
+										incidentVector.y * RefractiveIndexN1 / RefractiveIndexN2 + (RefractiveIndexN1 / RefractiveIndexN2 * cos(Teta1) - cos(Teta2)) * normalVector.y,
+										incidentVector.z * RefractiveIndexN1 / RefractiveIndexN2 + (RefractiveIndexN1 / RefractiveIndexN2 * cos(Teta1) - cos(Teta2)) * normalVector.z);
+	return RefractedRayD2;

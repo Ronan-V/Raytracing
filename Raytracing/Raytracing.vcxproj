@@ -143,18 +143,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="LightSource.cpp" />
+    <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CLightSource.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Materials.cpp" />
-    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="CMaterials.cpp" />
+    <ClCompile Include="CScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="LightSource.h" />
-    <ClInclude Include="Materials.h" />
+    <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CLightSource.h" />
+    <ClInclude Include="CMaterials.h" />
     <ClInclude Include="maths.h" />
-    <ClInclude Include="Scene.h" />
+    <ClInclude Include="CScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
