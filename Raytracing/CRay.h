@@ -1,7 +1,7 @@
 #pragma once
 #include "CScene.h"
 
-class CRayon :
+class CRay :
 	public CScene
 {
 private:
@@ -9,8 +9,8 @@ private:
 	Vector3D direction;
 
 public:
-	CRayon();
-	~CRayon();
+	CRay();
+	~CRay();
 	bool hasIntersection();
 };
 
