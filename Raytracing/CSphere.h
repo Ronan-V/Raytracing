@@ -1,5 +1,8 @@
 #pragma once
-class CSphere
+#include "CObjects.h"
+
+class CSphere :
+	public CScene
 {
 private:
 
