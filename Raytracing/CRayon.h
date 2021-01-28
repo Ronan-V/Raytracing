@@ -1,14 +1,16 @@
 #pragma once
 #include "CScene.h"
 
-class CCamera :
+class CRayon :
 	public CScene
 {
 private:
 	Vector3D position;
+	Vector3D direction;
 
 public:
-	CCamera();
-	~CCamera();
+	CRayon();
+	~CRayon();
+	bool hasIntersection();
 };
 

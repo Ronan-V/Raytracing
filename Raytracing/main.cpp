@@ -1,6 +1,5 @@
 #include <iostream>
 #include "FreeImage.h"
-#include "maths.h"
 
 int main(int argc, char** argv)
 {

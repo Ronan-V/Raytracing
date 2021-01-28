@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CLightSource.cpp" />
+    <ClCompile Include="CRayon.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CMaterials.cpp" />
     <ClCompile Include="CScene.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CLightSource.h" />
     <ClInclude Include="CMaterials.h" />
+    <ClInclude Include="CRayon.h" />
     <ClInclude Include="maths.h" />
     <ClInclude Include="CScene.h" />
   </ItemGroup>

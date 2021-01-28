@@ -2,7 +2,7 @@
 #include <iostream>
 
 struct Vector3D {
-	float x, y, z;
+	float x, y, z = 0;
 };
 
 Vector3D NewVector(float x, float y, float z);
@@ -18,18 +18,18 @@ Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVect
 Vector3D RefractedRay(const Vector3D& incidentVector, const Vector3D& normalVector, float RefractiveIndexN1, float RefractiveIndexN2);
 
 
-Vector3D NewVector(float x, float y, float z)
+inline Vector3D NewVector(float x, float y, float z)
 {
 	Vector3D newVector = { x, y, z };
 	return newVector;
 }
 
-float GetNorme(const Vector3D& v)
+inline float GetNorme(const Vector3D& v)
 {
 	return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
-Vector3D NormalizedVector(const Vector3D& vector)
+inline Vector3D NormalizedVector(const Vector3D& vector)
 {
 	Vector3D normalizedVector;
 
@@ -45,12 +45,12 @@ Vector3D NormalizedVector(const Vector3D& vector)
 	return normalizedVector;
 }
 
-float ScalarProduct(const Vector3D& vector1, const Vector3D& vector2) // MA.MB
+inline float ScalarProduct(const Vector3D& vector1, const Vector3D& vector2) // MA.MB
 {
 	return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
 }
 
-Vector3D VectorProduct(const Vector3D& vector1, const Vector3D& vector2) // MA * MB
+inline Vector3D VectorProduct(const Vector3D& vector1, const Vector3D& vector2) // MA * MB
 {
 	Vector3D resultedVector;
 	resultedVector.x = vector1.y * vector2.z - vector1.z * vector2.y;
@@ -60,7 +60,7 @@ Vector3D VectorProduct(const Vector3D& vector1, const Vector3D& vector2) // MA *
 }
 
 
-Vector3D FactorizeVector(float factor, const Vector3D& vector) // x * MA
+inline Vector3D FactorizeVector(float factor, const Vector3D& vector) // x * MA
 {
 	Vector3D factorizedVector;
 	factorizedVector.x = vector.x * factor;
@@ -69,7 +69,7 @@ Vector3D FactorizeVector(float factor, const Vector3D& vector) // x * MA
 	return factorizedVector;
 }
 
-Vector3D DivideVector(float quotient, const Vector3D& vector)
+inline Vector3D DivideVector(float quotient, const Vector3D& vector)
 {
 	Vector3D dividedVector;
 	dividedVector.x = vector.x / quotient;
@@ -78,7 +78,7 @@ Vector3D DivideVector(float quotient, const Vector3D& vector)
 	return dividedVector;
 }
 
-Vector3D SoustractVectors(const Vector3D& vector1, const Vector3D& vector2)
+inline Vector3D SoustractVectors(const Vector3D& vector1, const Vector3D& vector2)
 {
 	Vector3D soustractedVector;
 	soustractedVector.x = vector1.x - vector2.x;
@@ -87,7 +87,7 @@ Vector3D SoustractVectors(const Vector3D& vector1, const Vector3D& vector2)
 	return soustractedVector;
 }
 
-Vector3D SumVectors(const Vector3D& vector1, const Vector3D& vector2)
+inline Vector3D SumVectors(const Vector3D& vector1, const Vector3D& vector2)
 {
 	Vector3D summedVector;
 	summedVector.x = vector1.x + vector2.x;
@@ -96,7 +96,7 @@ Vector3D SumVectors(const Vector3D& vector1, const Vector3D& vector2)
 	return summedVector;
 }
 
-Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVector)
+inline Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVector)
 {
 	//R = I - 2 x (I.N) x N
 	Vector3D reflectedRay;
@@ -106,7 +106,7 @@ Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVect
 	return reflectedRay;
 }
 
-Vector3D RefractedRay(const Vector3D& incidentVector, const Vector3D& normalVector, float RefractiveIndexN1, float RefractiveIndexN2)
+inline Vector3D RefractedRay(const Vector3D& incidentVector, const Vector3D& normalVector, float RefractiveIndexN1, float RefractiveIndexN2)
 {
 	float Scalar = ScalarProduct(incidentVector, normalVector); //cos(Teta) = (u.v) / ||u|| . ||v||
 	Vector3D NormInci = NormalizedVector(incidentVector);

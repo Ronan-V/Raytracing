@@ -1,5 +1,8 @@
 #pragma once
-class CLightSource
+#include "CScene.h"
+
+class CLightSource :
+	public CScene
 {
 private:
 

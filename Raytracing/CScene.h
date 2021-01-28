@@ -1,4 +1,6 @@
 #pragma once
+#include "maths.h"
+
 class CScene
 {
 private:
