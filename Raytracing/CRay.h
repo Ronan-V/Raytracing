@@ -11,6 +11,5 @@ private:
 public:
 	CRay();
 	~CRay();
-	bool hasIntersection();
 };
 

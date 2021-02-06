@@ -10,5 +10,6 @@ CRay::~CRay()
 
 bool CRay::hasIntersection()
 {
+
 	return false;
 }
