@@ -5,11 +5,16 @@ class CRay :
 	public CScene
 {
 private:
-	Vector3D position;
+	Vector3D origin;
 	Vector3D direction;
 
 public:
 	CRay();
 	~CRay();
+
+	bool hasIntersection();
+
+	Vector3D GetOrigin();
+	Vector3D GetDirection();
 };
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "CScene.h"
+#include "CRay.h"
 class CObjects :
     public CScene
 {
