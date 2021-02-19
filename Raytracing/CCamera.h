@@ -6,9 +6,16 @@ class CCamera :
 {
 private:
 	Vector3D position;
+	float viewPlaneWidth;
+	float viewPlaneHeight;
+	float viewPlaneDist;
+
+	float topLeftPos;
+
+	Vector3D FindTopLeftPoint();
 
 public:
-	CCamera();
+	CCamera(float viewPlaneWidth, float viewPlaneHeight, float viewPlaneDist);
 	~CCamera();
 };
 
