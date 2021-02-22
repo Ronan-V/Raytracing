@@ -9,11 +9,11 @@ Vector3D NewVector(float x, float y, float z);
 float GetNorme(const Vector3D& v);
 Vector3D NormalizedVector(const Vector3D& vector);
 float ScalarProduct(const Vector3D& vector1, const Vector3D& vector2);
-Vector3D VectorProduct(const Vector3D& vector1, const Vector3D& vector2);
-Vector3D FactorizeVector(float factor, const Vector3D& vector);
-Vector3D DivideVector(float quotient, const Vector3D& vector);
-Vector3D SoustractVectors(const Vector3D& vector1, const Vector3D& vector2);
-Vector3D SumVectors(const Vector3D& vector1, const Vector3D& vector2);
+Vector3D operator*(const Vector3D& vector1, const Vector3D& vector2);
+Vector3D operator*(float factor, const Vector3D& vector);
+Vector3D operator/(float quotient, const Vector3D& vector);
+Vector3D operator-(const Vector3D& vector1, const Vector3D& vector2);
+Vector3D operator+(const Vector3D& vector1, const Vector3D& vector2);
 Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVector);
 Vector3D RefractedRay(const Vector3D& incidentVector, const Vector3D& normalVector, float RefractiveIndexN1, float RefractiveIndexN2);
 
@@ -36,7 +36,7 @@ inline Vector3D NormalizedVector(const Vector3D& vector)
 	float norm = GetNorme(vector);
 	if (norm != 0)
 	{
-		normalizedVector = DivideVector(norm, vector);
+		normalizedVector = norm / vector;
 	}
 	else
 	{
@@ -50,7 +50,7 @@ inline float ScalarProduct(const Vector3D& vector1, const Vector3D& vector2) // 
 	return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
 }
 
-inline Vector3D VectorProduct(const Vector3D& vector1, const Vector3D& vector2) // MA * MB
+inline Vector3D operator*(const Vector3D& vector1, const Vector3D& vector2) // MA * MB
 {
 	Vector3D resultedVector;
 	resultedVector.x = vector1.y * vector2.z - vector1.z * vector2.y;
@@ -60,7 +60,7 @@ inline Vector3D VectorProduct(const Vector3D& vector1, const Vector3D& vector2) 
 }
 
 
-inline Vector3D FactorizeVector(float factor, const Vector3D& vector) // x * MA
+inline Vector3D operator*(float factor, const Vector3D& vector) // x * MA
 {
 	Vector3D factorizedVector;
 	factorizedVector.x = vector.x * factor;
@@ -69,7 +69,7 @@ inline Vector3D FactorizeVector(float factor, const Vector3D& vector) // x * MA
 	return factorizedVector;
 }
 
-inline Vector3D DivideVector(float quotient, const Vector3D& vector)
+inline Vector3D operator/(float quotient, const Vector3D& vector)
 {
 	Vector3D dividedVector;
 	dividedVector.x = vector.x / quotient;
@@ -78,7 +78,7 @@ inline Vector3D DivideVector(float quotient, const Vector3D& vector)
 	return dividedVector;
 }
 
-inline Vector3D SoustractVectors(const Vector3D& vector1, const Vector3D& vector2)
+inline Vector3D operator-(const Vector3D& vector1, const Vector3D& vector2)
 {
 	Vector3D soustractedVector;
 	soustractedVector.x = vector1.x - vector2.x;
@@ -87,7 +87,7 @@ inline Vector3D SoustractVectors(const Vector3D& vector1, const Vector3D& vector
 	return soustractedVector;
 }
 
-inline Vector3D SumVectors(const Vector3D& vector1, const Vector3D& vector2)
+inline Vector3D operator+(const Vector3D& vector1, const Vector3D& vector2)
 {
 	Vector3D summedVector;
 	summedVector.x = vector1.x + vector2.x;
@@ -100,9 +100,8 @@ inline Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& nor
 {
 	//R = I - 2 x (I.N) x N
 	Vector3D reflectedRay;
-	float scalar = 2 * ScalarProduct(incidentVector, normalVector); // 2 x (I.N)
-	Vector3D tmp = FactorizeVector(scalar, normalVector); // 2 x (I.N) * N
-	reflectedRay = SoustractVectors(incidentVector, tmp); // I - 2 x (I.N) * N
+	float scalar = ScalarProduct(incidentVector, normalVector); // (I.N)
+	reflectedRay = incidentVector - 2 * scalar * normalVector; // I - 2 x (I.N) * N
 	return reflectedRay;
 }
 

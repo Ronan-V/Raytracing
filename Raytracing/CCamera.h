@@ -17,10 +17,10 @@ private:
 	float topLeftPos;
 
 	Vector3D FindTopLeftPoint();
-	Vector3D UnitVectorCalculation();
+	Vector3D UnitVectorCalculation(float x, float y, float xRes, float yRes);
 
 public:
-	CCamera(float viewPlaneWidth, float viewPlaneHeight, float viewPlaneDist);
+	CCamera(float viewplaneWidth, float viewplaneHeight, float viewplaneDist);
 	~CCamera();
 };
 

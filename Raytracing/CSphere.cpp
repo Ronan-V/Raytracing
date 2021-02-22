@@ -45,6 +45,6 @@ Vector3D CSphere::SphereIntersection(CRay ray)
 
 	if (t == 0) return NewVector(0, 0, 0); // No intersection
 
-	Vector3D intersection = SumVectors(rayOrigin, FactorizeVector(t, rayDirection));
+	Vector3D intersection = rayOrigin + (t * rayDirection);
 	return intersection;
 }
