@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "maths.h";
 
-inline Vector3D NewVector(float x, float y, float z)
+Vector3D NewVector(float x, float y, float z)
 {
 	Vector3D newVector = { x, y, z };
 	return newVector;
@@ -33,7 +33,7 @@ inline float ScalarProduct(const Vector3D& vector1, const Vector3D& vector2) // 
 	return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
 }
 
-inline Vector3D operator*(const Vector3D& vector1, const Vector3D& vector2) // MA * MB
+Vector3D operator*(const Vector3D& vector1, const Vector3D& vector2) // MA * MB
 {
 	Vector3D resultedVector;
 	resultedVector.x = vector1.y * vector2.z - vector1.z * vector2.y;
@@ -43,7 +43,7 @@ inline Vector3D operator*(const Vector3D& vector1, const Vector3D& vector2) // M
 }
 
 
-inline Vector3D operator*(float factor, const Vector3D& vector) // x * MA
+Vector3D operator*(float factor, const Vector3D& vector) // x * MA
 {
 	Vector3D factorizedVector;
 	factorizedVector.x = vector.x * factor;
@@ -52,7 +52,7 @@ inline Vector3D operator*(float factor, const Vector3D& vector) // x * MA
 	return factorizedVector;
 }
 
-inline Vector3D operator/(float quotient, const Vector3D& vector)
+Vector3D operator/(float quotient, const Vector3D& vector)
 {
 	Vector3D dividedVector;
 	dividedVector.x = vector.x / quotient;
@@ -61,7 +61,7 @@ inline Vector3D operator/(float quotient, const Vector3D& vector)
 	return dividedVector;
 }
 
-inline Vector3D operator-(const Vector3D& vector1, const Vector3D& vector2)
+Vector3D operator-(const Vector3D& vector1, const Vector3D& vector2)
 {
 	Vector3D soustractedVector;
 	soustractedVector.x = vector1.x - vector2.x;
@@ -70,7 +70,7 @@ inline Vector3D operator-(const Vector3D& vector1, const Vector3D& vector2)
 	return soustractedVector;
 }
 
-inline Vector3D operator+(const Vector3D& vector1, const Vector3D& vector2)
+Vector3D operator+(const Vector3D& vector1, const Vector3D& vector2)
 {
 	Vector3D summedVector;
 	summedVector.x = vector1.x + vector2.x;
@@ -84,12 +84,12 @@ inline bool operator==(const Vector3D& vector1, const Vector3D& vector2)
 	return vector1.x == vector2.x && vector1.y == vector2.y && vector1.z == vector2.z;
 }
 
-inline bool operator!=(const Vector3D& vector1, const Vector3D& vector2)
+bool operator!=(const Vector3D& vector1, const Vector3D& vector2)
 {
 	return !(vector1 == vector2);
 }
 
-inline Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVector)
+Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVector)
 {
 	//R = I - 2 x (I.N) x N
 	Vector3D reflectedRay;
@@ -98,7 +98,7 @@ inline Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& nor
 	return reflectedRay;
 }
 
-inline Vector3D RefractedRay(const Vector3D& incidentVector, const Vector3D& normalVector, float RefractiveIndexN1, float RefractiveIndexN2)
+Vector3D RefractedRay(const Vector3D& incidentVector, const Vector3D& normalVector, float RefractiveIndexN1, float RefractiveIndexN2)
 {
 	float Scalar = ScalarProduct(incidentVector, normalVector); //cos(Teta) = (u.v) / ||u|| . ||v||
 	Vector3D NormInci = NormalizedVector(incidentVector);

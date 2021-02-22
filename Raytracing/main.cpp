@@ -16,7 +16,7 @@ int main(int argc, char** argv)
 	CCamera camera = CCamera(4, 3, 1);
 
 	CScene myScene;
-	CSphere mySphere = CSphere(NewVector(0, 0, 3), 0.5);
+	CSphere mySphere = CSphere(NewVector(0, 0, 3), 3);
 
 	for (size_t i = 0; i < 640; i++)
 	{

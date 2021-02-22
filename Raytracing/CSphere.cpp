@@ -31,7 +31,6 @@ Vector3D CSphere::SphereIntersection(CRay ray)
 
 	float det = pow(b, 2) - 4 * a * c;
 
-	std::cout << "Determinant = " + (int)det << std::endl;
 	if (det == 0) // 1 intersection
 	{
 		t = -b / (2 * a);
