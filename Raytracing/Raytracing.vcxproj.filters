@@ -37,6 +37,8 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="CObject.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="Source.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
