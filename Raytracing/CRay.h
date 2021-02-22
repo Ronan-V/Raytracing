@@ -1,21 +1,17 @@
-#pragma once
-#include "CScene.h"
+﻿#pragma once
+#include "CObject.h"
 
 class CRay :
-	public CScene
+	public CObject
 {
 private:
-	Vector3D origin;
 	Vector3D direction;
-
 public:
 	CRay();
-	CRay(Vector3D origin, Vector3D direction);
+	CRay(Vector3D position, Vector3D direction);
 	~CRay();
 
 	bool hasIntersection();
 
-	Vector3D GetOrigin();
 	Vector3D GetDirection();
 };
-

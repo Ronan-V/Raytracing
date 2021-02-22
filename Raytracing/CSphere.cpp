@@ -1,7 +1,14 @@
-#include "CSphere.h"
+ï»¿#include "CSphere.h"
+#include "CRay.h"
 
 CSphere::CSphere()
 {
+}
+
+CSphere::CSphere(Vector3D position, float rayon)
+{
+	this->position = position;
+	this->rayon = rayon;
 }
 
 CSphere::~CSphere()
@@ -13,7 +20,7 @@ Vector3D CSphere::SphereIntersection(CRay ray)
 	float t;
 
 	Vector3D rayDirection = ray.GetDirection();
-	Vector3D rayOrigin = ray.GetOrigin();
+	Vector3D rayOrigin = ray.get_position();
 	float X_zero = rayOrigin.x - position.x;
 	float Y_zero = rayOrigin.y - position.y;
 	float Z_zero = rayOrigin.z - position.z;
@@ -34,7 +41,7 @@ Vector3D CSphere::SphereIntersection(CRay ray)
 	{
 		float t1 = (-b + sqrt(det)) / (2 * a);
 		float t2 = (-b - sqrt(det)) / (2 * a);
-		//TODO Calculer lequel est le plus près de la caméra et return celui-ci car c'est celui qu'il faut afficher
+		//TODO Calculer lequel est le plus prÃ¨s de la camÃ©ra et return celui-ci car c'est celui qu'il faut afficher
 		if (t1 < t2) t = t1;
 		else t = t2;
 	}
@@ -47,4 +54,8 @@ Vector3D CSphere::SphereIntersection(CRay ray)
 
 	Vector3D intersection = rayOrigin + (t * rayDirection);
 	return intersection;
+}
+
+bool CSphere::SphereIntersectionBool(CRay ray) {
+	return SphereIntersection(ray) != NewVector(0, 0, 0);
 }
