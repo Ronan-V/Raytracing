@@ -1,11 +1,10 @@
-#pragma once
-#include "CScene.h"
+﻿#pragma once
+#include "CObject.h"
 
 class CCamera :
-	public CScene
+	public CObject
 {
 private:
-	Vector3D position;
 	float viewplaneWidth;
 	float viewplaneHeight;
 	float viewplaneDist;
@@ -14,13 +13,11 @@ private:
 	Vector3D upVec = NewVector(0, 1, 0);
 	Vector3D rightVec = NewVector(1, 0, 0);
 
-	float topLeftPos;
+	Vector3D topLeftPos;
 
 	Vector3D FindTopLeftPoint();
-	Vector3D UnitVectorCalculation(float x, float y, float xRes, float yRes);
-
 public:
+	Vector3D UnitVectorCalculation(float x, float y, float xRes, float yRes);
 	CCamera(float viewplaneWidth, float viewplaneHeight, float viewplaneDist);
 	~CCamera();
 };
-
