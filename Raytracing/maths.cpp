@@ -1,10 +1,5 @@
-#pragma once
-#include <iostream>
+ï»¿#pragma once
 #include "maths.h";
-
-struct Vector3D {
-	float x, y, z = 0;
-};
 
 inline Vector3D NewVector(float x, float y, float z)
 {
@@ -28,7 +23,7 @@ inline Vector3D NormalizedVector(const Vector3D& vector)
 	}
 	else
 	{
-		std::cout << "La norme est égal à 0" << std::endl;
+		std::cout << "La norme est Ã©gal Ã  0" << std::endl;
 	}
 	return normalizedVector;
 }
@@ -86,17 +81,13 @@ inline Vector3D operator+(const Vector3D& vector1, const Vector3D& vector2)
 
 inline bool operator==(const Vector3D& vector1, const Vector3D& vector2)
 {
-	bool isEqual = true;
-	if (vector1.x == vector2.x && vector1.y == vector2.y && vector1.z == vector2.z) return true;
-	else return false;
+	return vector1.x == vector2.x && vector1.y == vector2.y && vector1.z == vector2.z;
 }
 
-/*inline bool operator!=(const Vector3D& vector1, const Vector3D& vector2)
+inline bool operator!=(const Vector3D& vector1, const Vector3D& vector2)
 {
-	bool isEqual = true;
-	if (vector1.x == vector2.x && vector1.y == vector2.y && vector1.z == vector2.z) return false;
-	else return true;
-}*/
+	return !(vector1 == vector2);
+}
 
 inline Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVector)
 {

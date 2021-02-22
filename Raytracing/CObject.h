@@ -1,8 +1,6 @@
 ﻿#pragma once
-#include "CScene.h"
-#include "CRay.h"
+#include "maths.h"
 class CObject {
-private:
 protected:
 	Vector3D position;
 public:

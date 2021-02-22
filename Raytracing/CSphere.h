@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include "CObject.h"
+#include "CRay.h"
+#include <iostream>
 
 class CSphere :
 	public CObject

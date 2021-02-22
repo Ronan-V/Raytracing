@@ -1,5 +1,4 @@
 ﻿#include "CSphere.h"
-#include "CRay.h"
 
 CSphere::CSphere()
 {
