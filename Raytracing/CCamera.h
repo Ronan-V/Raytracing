@@ -23,4 +23,3 @@ public:
 	CCamera(float viewplaneWidth, float viewplaneHeight, float viewplaneDist);
 	~CCamera();
 };
-
