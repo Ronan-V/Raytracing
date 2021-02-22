@@ -10,6 +10,7 @@ private:
 
 public:
 	CRay();
+	CRay(Vector3D origin, Vector3D direction);
 	~CRay();
 
 	bool hasIntersection();

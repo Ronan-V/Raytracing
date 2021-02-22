@@ -12,6 +12,6 @@ public:
 	CSphere();
 	~CSphere();
 
-	Vector3D SphereIntersection(CRay ray, Vector3D point);
+	Vector3D SphereIntersection(CRay ray);
 };
 

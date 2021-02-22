@@ -4,6 +4,12 @@ CRay::CRay()
 {
 }
 
+CRay::CRay(Vector3D origin, Vector3D direction)
+{
+	this->origin = origin;
+	this->direction = direction;
+}
+
 CRay::~CRay()
 {
 }

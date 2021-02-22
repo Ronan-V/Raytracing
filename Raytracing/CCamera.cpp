@@ -2,17 +2,33 @@
 
 Vector3D CCamera::FindTopLeftPoint()
 {
-	Vector3D vecDir = NewVector(0, 0, 1);
-	Vector3D upVec = NewVector(0, 1, 0);
-	Vector3D rightVec = NewVector(1, 0, 0);
-	topLeftPos = SumVectors(SumVectors(position, (FactorizeVector(FactorizeVector(viewPlaneDist, vecDir), FactorizeVector(viewPlaneHeight / 2, upVec)))), FactorizeVector(viewPlaneWidth / 2, rightVec));
+	
+	Vector3D topLeftPos = SoustractVectors(
+							SumVectors(
+								position,
+								(SumVectors(
+										FactorizeVector(viewplaneDist, vecDir),
+										FactorizeVector(viewplaneHeight / 2, upVec)
+									))), 
+							FactorizeVector(viewplaneWidth / 2, rightVec));
+	return topLeftPos;
+}
+
+Vector3D CCamera::UnitVectorCalculation(float x, float y, float xRes, float yRes)
+{
+	float xIndent, yIndent;
+
+	xIndent = viewplaneWidth / (float)xRes;
+	yIndent = viewplaneHeight / (float)yRes;
+
+	return (FindTopLeftPoint() + rightVec * xIndent * x - upVec * yIndent * y) - position;
 }
 
 CCamera::CCamera(float viewPlaneWidth, float viewPlaneHeight, float viewPlaneDist)
 {
-	this->viewPlaneWidth = viewPlaneWidth;
-	this->viewPlaneHeight = viewPlaneHeight;
-	this->viewPlaneDist = viewPlaneDist;
+	this->viewplaneWidth = viewPlaneWidth;
+	this->viewplaneHeight = viewPlaneHeight;
+	this->viewplaneDist = viewPlaneDist;
 
 	FindTopLeftPoint();
 }

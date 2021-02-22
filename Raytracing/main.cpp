@@ -6,9 +6,10 @@ int main(int argc, char** argv)
 {
 	RGBQUAD color;
 	FIBITMAP* image;
-	image = FreeImage_Allocate(256, 256, 32);
+	image = FreeImage_Allocate(640, 480, 32);
 	CScene myScene;
 	//CSphere mySphere;
+	//CRay myRay(NewVector(0,0,0), NewVector(0,0,1));
 
 
 	for (size_t i = 0; i < 640; i++)

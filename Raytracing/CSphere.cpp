@@ -8,9 +8,9 @@ CSphere::~CSphere()
 {
 }
 
-Vector3D CSphere::SphereIntersection(CRay ray, Vector3D point)
+Vector3D CSphere::SphereIntersection(CRay ray)
 {
-	float t; //Variable in our equation
+	float t;
 
 	Vector3D rayDirection = ray.GetDirection();
 	Vector3D rayOrigin = ray.GetOrigin();
