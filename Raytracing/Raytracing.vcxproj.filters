@@ -37,6 +37,10 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="CObject.cpp">
+    <ClCompile Include="Source.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="maths.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
