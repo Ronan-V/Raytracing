@@ -152,7 +152,6 @@
     <ClCompile Include="CMaterials.cpp" />
     <ClCompile Include="CScene.cpp" />
     <ClCompile Include="maths.cpp" />
-    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCamera.h" />

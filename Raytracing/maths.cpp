@@ -84,6 +84,20 @@ inline Vector3D operator+(const Vector3D& vector1, const Vector3D& vector2)
 	return summedVector;
 }
 
+inline bool operator==(const Vector3D& vector1, const Vector3D& vector2)
+{
+	bool isEqual = true;
+	if (vector1.x == vector2.x && vector1.y == vector2.y && vector1.z == vector2.z) return true;
+	else return false;
+}
+
+/*inline bool operator!=(const Vector3D& vector1, const Vector3D& vector2)
+{
+	bool isEqual = true;
+	if (vector1.x == vector2.x && vector1.y == vector2.y && vector1.z == vector2.z) return false;
+	else return true;
+}*/
+
 inline Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVector)
 {
 	//R = I - 2 x (I.N) x N
