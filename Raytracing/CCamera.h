@@ -20,4 +20,5 @@ public:
 	Vector3D UnitVectorCalculation(float x, float y, float xRes, float yRes);
 	CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist);
 	~CCamera();
+	void Iradiate(short xScreen, short yScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair<RGBQUAD, Vector3D>> visibility);
 };
