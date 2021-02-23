@@ -1,13 +1,20 @@
-#pragma once
-#include "CScene.h"
+﻿#pragma once
+#include "CObject.h"
+#include <FreeImage.h>
+#include <vector>
 
 class CLightSource :
-	public CScene
+	public CObject
 {
 private:
 
 public:
 	CLightSource();
 	~CLightSource();
-};
 
+	void Illuminate();
+	CLightSource(short x, short y, short z);
+
+	void Illuminate(short xScreen, short yScreen, FIBITMAP* image, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility);
+	float Distance(Vector3D Light, Vector3D Intersection);
+};

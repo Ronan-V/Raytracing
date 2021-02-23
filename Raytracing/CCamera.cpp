@@ -31,7 +31,7 @@ CCamera::~CCamera()
 {
 }
 
-void CCamera::Iradiate(short xScreen, short yScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>> visibility)
+void CCamera::Iradiate(short xScreen, short yScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility)
 {
 	RGBQUAD colorSetter;
 	RGBQUAD colorGetter;
@@ -56,19 +56,19 @@ void CCamera::Iradiate(short xScreen, short yScreen, FIBITMAP* image, std::vecto
 					colorSetter.rgbRed = 255;
 					colorSetter.rgbGreen = 255;
 					colorSetter.rgbBlue = 255;
-					visibility.push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
+					visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
 					FreeImage_SetPixelColor(image, i, j, &colorSetter);
 					break;
 				}
 			}
 		}
 	}
-	std::cout << "nombre de couples pixel:vecteur : " << visibility.size() << std::endl << std::endl;
+	std::cout << "nombre de couples pixel:vecteur : " << visibility->size() << std::endl << std::endl;
 	//std::cout << "valeur du pixel rouge du couple 40 000 : " << visibility[40000].first.rgbRed << std::endl << std::endl;
 	FreeImage_Save(FIF_BMP, image, "out.bmp");
 }
 
-void CCamera::IradiateBrice(short xScreen, short yScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>> visibility, CCamera camera)
+void CCamera::IradiateBrice(short xScreen, short yScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility, CCamera camera)
 {
 	RGBQUAD colorSetter;
 
@@ -89,14 +89,15 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, FIBITMAP* image, std::
 					colorSetter.rgbRed = 255;
 					colorSetter.rgbGreen = 255;
 					colorSetter.rgbBlue = 255;
-					visibility.push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
+					visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
 					FreeImage_SetPixelColor(image, i, j, &colorSetter);
 					break;
 				}
 			}
 		}
 	}
-	std::cout << "nombre de couples pixel:vecteur : " << visibility.size() << std::endl << std::endl;
-	//std::cout << "valeur du pixel rouge du couple 40 000 : " << visibility[40000].first.rgbRed << std::endl << std::endl;
+	std::cout << "nombre de couples pixel:vecteur : " << visibility->size() << std::endl << std::endl;
+	std::cout << "valeur du pixel rouge du couple 40 000(200;200) : " << visibility->at(40000).first.rgbRed << std::endl << std::endl;
+	std::cout << "valeur du pixel rouge du couple 250 000 (500;500): " << visibility->at(250000).first.rgbRed << std::endl << std::endl;
 	FreeImage_Save(FIF_BMP, image, "out.bmp");
 }
