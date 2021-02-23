@@ -18,6 +18,6 @@ private:
 	Vector3D FindTopLeftPoint();
 public:
 	Vector3D UnitVectorCalculation(float x, float y, float xRes, float yRes);
-	CCamera(float viewplaneWidth, float viewplaneHeight, float viewplaneDist);
+	CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist);
 	~CCamera();
 };

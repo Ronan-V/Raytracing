@@ -13,9 +13,9 @@ Vector3D CCamera::UnitVectorCalculation(float x, float y, float xRes = 640, floa
 	return (FindTopLeftPoint() + x * xIndent * rightVec - y * yIndent * upVec) - position;
 }
 
-CCamera::CCamera(float viewplaneWidth, float viewplaneHeight, float viewplaneDist)
+CCamera::CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist)
 {
-	this->position = NewVector(0.0, 0.0, 0.0);
+	this->position = position;
 	this->viewplaneWidth = viewplaneWidth;
 	this->viewplaneHeight = viewplaneHeight;
 	this->viewplaneDist = viewplaneDist;

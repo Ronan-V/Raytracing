@@ -13,17 +13,17 @@ int main(int argc, char** argv)
 	RGBQUAD color;
 	FIBITMAP* image = FreeImage_Allocate(width, length, 32);
 
-	CCamera camera = CCamera(4, 3, 1);
+	CCamera camera = CCamera(NewVector(0, 0, 0), 0.5, 0.35, 1);
 
 	CScene myScene;
-	CSphere mySphere = CSphere(NewVector(0, 0, 3), 3);
+	CSphere mySphere = CSphere(NewVector(0, 0, 10), 20);
 
-	for (size_t i = 0; i < 640; i++)
+	for (size_t i = 0; i < width; i++)
 	{
-		for (size_t j = 0; j < 480; j++)
+		for (size_t j = 0; j < length; j++)
 		{
-			CRay ray = CRay(camera.get_position(), camera.UnitVectorCalculation(i, j, width, length));
-
+			CRay ray = CRay(camera.get_position(), NormalizedVector(camera.UnitVectorCalculation(i, j, width, length)));
+			//std::cout << camera.UnitVectorCalculation(i, j, width, length).x;
 			// Quand la ray a une intersection avec notre objet (pour le moment sphere)
 			if (mySphere.SphereIntersectionBool(ray))
 			{

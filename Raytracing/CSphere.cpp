@@ -25,11 +25,11 @@ Vector3D CSphere::SphereIntersection(CRay ray)
 	float Z_zero = rayOrigin.z - position.z;
 
 	//Equation is: pow(t, 2) * (pow(rayDirection.x, 2) + pow(rayDirection.y, 2) + pow(rayDirection.z, 2)) + 2 * t * (X_zero * rayDirection.x + Y_zero * rayDirection.y + Z_zero * rayDirection.z) + (pow(X_zero, 2) + (pow(Y_zero, 2) + (pow(Z_zero, 2)) - pow(rayon, 2);
-	float a = pow(rayDirection.x, 2) + pow(rayDirection.y, 2) + pow(rayDirection.z, 2);
+	float a = rayDirection.x*rayDirection.x + rayDirection.y*rayDirection.y + rayDirection.z*rayDirection.z;
 	float b = X_zero * rayDirection.x + Y_zero * rayDirection.y + Z_zero * rayDirection.z;
-	float c = (pow(X_zero, 2) + pow(Y_zero, 2) + pow(Z_zero, 2)) - pow(rayon, 2);
+	float c = (X_zero*X_zero + Y_zero*Y_zero + Z_zero*Z_zero) - rayon*rayon;
 
-	float det = pow(b, 2) - 4 * a * c;
+	float det = b*b - 4 * a * c;
 
 	if (det == 0) // 1 intersection
 	{
@@ -39,6 +39,7 @@ Vector3D CSphere::SphereIntersection(CRay ray)
 	{
 		float t1 = (-b + sqrt(det)) / (2 * a);
 		float t2 = (-b - sqrt(det)) / (2 * a);
+		//std::cout << t2;
 		//TODO Calculer lequel est le plus près de la caméra et return celui-ci car c'est celui qu'il faut afficher
 		if (t1 < t2) t = t1;
 		else t = t2;
