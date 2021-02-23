@@ -25,4 +25,5 @@ public:
 	CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist);
 	~CCamera();
 	void Iradiate(short xScreen, short yScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>> visibility);
+	void IradiateBrice(short xScreen, short yScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair<RGBQUAD, Vector3D>> visibility);
 };

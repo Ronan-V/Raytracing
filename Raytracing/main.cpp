@@ -71,7 +71,7 @@ int main(int argc, char** argv)
 
 	// -------------------------- INIT CAMERA------------------------------
 
-	CCamera myCamera;
+	CCamera myCamera = CCamera(NewVector(0, 0, 0), 0.5, 0.35, 1);
 
 	// -------------------------- INIT PAIRS ------------------------------
 
