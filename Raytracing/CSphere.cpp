@@ -4,9 +4,8 @@ CSphere::CSphere()
 {
 }
 
-CSphere::CSphere(Vector3D position, float rayon)
+CSphere::CSphere(Vector3D position, float rayon) : CObject(position)
 {
-	this->position = position;
 	this->rayon = rayon;
 }
 
@@ -14,9 +13,9 @@ CSphere::~CSphere()
 {
 }
 
-Vector3D CSphere::SphereIntersection(CRay ray)
+Vector3D CSphere::get_intersection_coordinates(CRay ray)
 {
-	float t;
+	float t; //Variable in our equation
 
 	Vector3D rayDirection = ray.GetDirection();
 	Vector3D rayOrigin = ray.get_position();
@@ -25,11 +24,12 @@ Vector3D CSphere::SphereIntersection(CRay ray)
 	float Z_zero = rayOrigin.z - position.z;
 
 	//Equation is: pow(t, 2) * (pow(rayDirection.x, 2) + pow(rayDirection.y, 2) + pow(rayDirection.z, 2)) + 2 * t * (X_zero * rayDirection.x + Y_zero * rayDirection.y + Z_zero * rayDirection.z) + (pow(X_zero, 2) + (pow(Y_zero, 2) + (pow(Z_zero, 2)) - pow(rayon, 2);
-	float a = rayDirection.x*rayDirection.x + rayDirection.y*rayDirection.y + rayDirection.z*rayDirection.z;
-	float b = X_zero * rayDirection.x + Y_zero * rayDirection.y + Z_zero * rayDirection.z;
-	float c = (X_zero*X_zero + Y_zero*Y_zero + Z_zero*Z_zero) - rayon*rayon;
+	float a = pow(rayDirection.x, 2) + pow(rayDirection.y, 2) + pow(rayDirection.z, 2);
+	float b = (X_zero * rayDirection.x + Y_zero * rayDirection.y + Z_zero * rayDirection.z) / 4;
+	float c = (pow(X_zero, 2) + pow(Y_zero, 2) + pow(Z_zero, 2)) - pow(rayon, 2);
 
-	float det = b*b - 4 * a * c;
+	float det = pow(b, 2) - 4 * a * c;
+	int float_det = (int)det;
 
 	if (det == 0) // 1 intersection
 	{
@@ -39,22 +39,17 @@ Vector3D CSphere::SphereIntersection(CRay ray)
 	{
 		float t1 = (-b + sqrt(det)) / (2 * a);
 		float t2 = (-b - sqrt(det)) / (2 * a);
-		//std::cout << t2;
-		//TODO Calculer lequel est le plus près de la caméra et return celui-ci car c'est celui qu'il faut afficher
 		if (t1 < t2) t = t1;
 		else t = t2;
 	}
 	else //det < 0 --> No intersection
 	{
-		t = 0;
+		return NewVector(0, 0, 0);
 	}
 
-	if (t == 0) return NewVector(0, 0, 0); // No intersection
-
-	Vector3D intersection = rayOrigin + (t * rayDirection);
-	return intersection;
+	return rayOrigin + (t * rayDirection);
 }
 
-bool CSphere::SphereIntersectionBool(CRay ray) {
-	return SphereIntersection(ray) != NewVector(0, 0, 0);
+bool CSphere::has_intersection(CRay ray) {
+	return get_intersection_coordinates(ray) != NewVector(0, 0, 0);
 }

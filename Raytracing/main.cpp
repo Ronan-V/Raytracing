@@ -5,7 +5,9 @@
 #include "CCamera.h"
 #include "CSphere.h"
 #include <vector>
+#include "main.h"
 
+/*
 int main(int argc, char** argv)
 {
 	int width = 640;
@@ -46,7 +48,7 @@ int main(int argc, char** argv)
 	FreeImage_Save(FIF_BMP, image, "out.bmp");
 
 	return EXIT_SUCCESS;
-}
+}*/
 
 int main(int argc, char** argv)
 {
