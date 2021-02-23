@@ -1,19 +1,18 @@
-﻿#pragma once
-#include "CObject.h"
-#include "CRay.h"
-#include <iostream>
+#pragma once
+#include "CObjects.h"
 
 class CSphere :
-	public CObject
+	public CObjects
 {
 private:
+	Vector3D position;
 	float rayon;
 
 public:
 	CSphere();
-	CSphere(Vector3D position, float rayon);
 	~CSphere();
+	CSphere(Vector3D position, float rayon);
 
 	Vector3D SphereIntersection(CRay ray);
-	bool SphereIntersectionBool(CRay ray);
 };
+

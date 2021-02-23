@@ -1,48 +1,43 @@
-﻿#include <iostream>
+#include <iostream>
 #include "FreeImage.h"
 #include "CScene.h"
-#include "CRay.h"
-#include "CCamera.h"
 #include "CSphere.h"
+#include "CCamera.h"
+#include <vector>
+#include <utility>
+
 
 int main(int argc, char** argv)
 {
-	int width = 640;
-	int length = 480;
+	// -------------------------- FREEIMAGE -------------------------------
+	FIBITMAP* image;
+	short xScreen =  1000, yScreen = 1000;
+	image = FreeImage_Allocate(xScreen, yScreen, 32);
 
-	RGBQUAD color;
-	FIBITMAP* image = FreeImage_Allocate(width, length, 32);
+	// -------------------------- INIT SPHERES-----------------------------
 
-	CCamera camera = CCamera(4, 3, 1);
+	std::vector<CSphere> mySpheres; // tableau de spheres
+	CSphere mysphere0(NewVector(200, 200, 0) , 200); // creation sphere1
+	CSphere mysphere1(NewVector(200, 800, 0), 200); // creation sphere2
+	CSphere mysphere2(NewVector(800, 200, 0), 200); // creation sphere3
+	CSphere mysphere3(NewVector(800, 800, 0), 200); // creation sphere4
+	mySpheres.push_back(mysphere0); // ajout dans tableau
+	mySpheres.push_back(mysphere1); // ajout dans tableau
+	mySpheres.push_back(mysphere2); // ajout dans tableau
+	mySpheres.push_back(mysphere3); // ajout dans tableau
 
-	CScene myScene;
-	CSphere mySphere = CSphere(NewVector(0, 0, 3), 3);
+	// -------------------------- INIT CAMERA------------------------------
 
-	for (size_t i = 0; i < 640; i++)
-	{
-		for (size_t j = 0; j < 480; j++)
-		{
-			CRay ray = CRay(camera.get_position(), camera.UnitVectorCalculation(i, j, width, length));
+	CCamera myCamera;
 
-			// Quand la ray a une intersection avec notre objet (pour le moment sphere)
-			if (mySphere.SphereIntersectionBool(ray))
-			{
-				color.rgbRed = 255;
-				color.rgbGreen = 255;
-				color.rgbBlue = 255;
-			}
-			else
-			{
-				color.rgbRed = 0;
-				color.rgbGreen = 0;
-				color.rgbBlue = 0;
-			}
+	// -------------------------- INIT PAIRS ------------------------------
 
-			FreeImage_SetPixelColor(image, i, j, &color);
-		}
-	}
+	std::vector<std::pair <RGBQUAD, Vector3D>> visibility;
 
-	FreeImage_Save(FIF_BMP, image, "out.bmp");
+	// -------------------------- MAIN FUNCTIONS------------------------------
+
+	myCamera.Iradiate(xScreen, yScreen, image, mySpheres, visibility);
+	std::cout << visibility.size();
 
 	return EXIT_SUCCESS;
 }
