@@ -11,13 +11,13 @@ int main(int argc, char** argv)
 {
 	// -------------------------- FREEIMAGE -------------------------------
 	FIBITMAP* image;
-	short xScreen =  100, yScreen = 100;
+	short xScreen =  1000, yScreen = 1000;
 	image = FreeImage_Allocate(xScreen, yScreen, 32);
 
 	// -------------------------- INIT SPHERES-----------------------------
 
 	std::vector<CSphere> mySpheres; // tableau de spheres
-	CSphere mysphere0(NewVector(20, 20, 0) , 20); // creation sphere1
+	CSphere mysphere0(NewVector(200, 200, 0) , 200); // creation sphere1
 	CSphere mysphere1(NewVector(200, 800, 0), 200); // creation sphere2
 	CSphere mysphere2(NewVector(800, 200, 0), 200); // creation sphere3
 	CSphere mysphere3(NewVector(800, 800, 0), 200); // creation sphere4
