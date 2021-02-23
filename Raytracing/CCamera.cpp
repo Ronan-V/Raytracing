@@ -99,5 +99,5 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, FIBITMAP* image, std::
 	std::cout << "nombre de couples pixel:vecteur : " << visibility->size() << std::endl << std::endl;
 	std::cout << "valeur du pixel rouge du couple 40 000(200;200) : " << visibility->at(40000).first.rgbRed << std::endl << std::endl;
 	std::cout << "valeur du pixel rouge du couple 250 000 (500;500): " << visibility->at(250000).first.rgbRed << std::endl << std::endl;
-	FreeImage_Save(FIF_BMP, image, "out.bmp");
+	FreeImage_Save(FIF_BMP, image, "out_brice.bmp");
 }

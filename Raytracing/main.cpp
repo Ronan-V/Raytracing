@@ -60,7 +60,7 @@ int main(int argc, char** argv)
 	// -------------------------- INIT SPHERES-----------------------------
 
 	std::vector<CSphere> mySpheres; // tableau de spheres
-	CSphere mysphere0(NewVector(200, 200, 0), 200); // creation sphere1
+	CSphere mysphere0(NewVector(2, 2, 0), 200); // creation sphere1
 	mySpheres.push_back(mysphere0); // ajout dans tableau
 	/*
 	CSphere mysphere1(NewVector(200, 800, 0), 200); // creation sphere2
@@ -80,8 +80,8 @@ int main(int argc, char** argv)
 	std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
 
 	// -------------------------- MAIN FUNCTIONS------------------------------
-	myCamera.Iradiate(xScreen, yScreen, image, mySpheres, visibility);
-	myLightSource.Illuminate(xScreen, yScreen, image, visibility);
+	myCamera.IradiateBrice(xScreen, yScreen, image, mySpheres, visibility, myCamera);
+	//myLightSource.Illuminate(xScreen, yScreen, image, visibility);
 
 	// -------------------------- MAIN FUNCTIONS------------------------------
 
