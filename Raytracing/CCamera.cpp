@@ -6,7 +6,7 @@
 CCamera::CCamera() {
 }
 
-Vector3D CCamera::FindTopLeftPoint()
+Vector3D CCamera::get_top_left_point()
 {
 	return position + ((viewplaneDist * vecDir) + (viewplaneHeight / 2) * upVec) - ((viewplaneWidth / 2) * rightVec);
 }
@@ -16,16 +16,15 @@ Vector3D CCamera::UnitVectorCalculation(float x, float y, float xRes = 640, floa
 	float xIndent = viewplaneWidth / xRes;
 	float yIndent = viewplaneHeight / yRes;
 
-	return (FindTopLeftPoint() + x * xIndent * rightVec - y * yIndent * upVec) - position;
+	return (get_top_left_point() + x * xIndent * rightVec - y * yIndent * upVec) - position;
 }
 
-CCamera::CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist)
+CCamera::CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist) : CObject(position)
 {
-	this->position = position;
 	this->viewplaneWidth = viewplaneWidth;
 	this->viewplaneHeight = viewplaneHeight;
 	this->viewplaneDist = viewplaneDist;
-	this->topLeftPos = FindTopLeftPoint();
+	this->topLeftPos = get_top_left_point();
 }
 
 CCamera::~CCamera()
@@ -68,7 +67,8 @@ void CCamera::Iradiate(short xScreen, short yScreen, FIBITMAP* image, std::vecto
 	//std::cout << "valeur du pixel rouge du couple 40 000 : " << visibility[40000].first.rgbRed << std::endl << std::endl;
 	FreeImage_Save(FIF_BMP, image, "out.bmp");
 }
-void CCamera::IradiateBrice(short xScreen, short yScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>> visibility)
+
+void CCamera::IradiateBrice(short xScreen, short yScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>> visibility, CCamera camera)
 {
 	RGBQUAD colorSetter;
 
@@ -76,10 +76,7 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, FIBITMAP* image, std::
 	{
 		for (size_t j = 0; j < yScreen; j++)
 		{
-			Vector3D myOrigin = NewVector(i, j, 0);
-			Vector3D myDirection = NewVector(i, j, 0);
-			Vector3D zero = NewVector(0, 0, 0);
-			CRay myRayon(myOrigin, myDirection);
+			CRay myRayon = CRay(camera.get_position(), NormalizedVector(camera.UnitVectorCalculation(i, j, xScreen, yScreen)));
 			colorSetter.rgbRed = 0;
 			colorSetter.rgbGreen = 0;
 			colorSetter.rgbBlue = 0;
