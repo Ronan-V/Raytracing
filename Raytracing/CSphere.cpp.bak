@@ -40,7 +40,6 @@ Vector3D CSphere::get_intersection_coordinates(CRay ray)
 	{
 		float t1 = (-b + sqrt(det)) / (2 * a);
 		float t2 = (-b - sqrt(det)) / (2 * a);
-		//std::cout << "2 intersections  : t1 = " << t1 << "t2 = " << t2 << std::endl;
 		if (t1 < t2) t = t1;
 		else t = t2;
 	}
