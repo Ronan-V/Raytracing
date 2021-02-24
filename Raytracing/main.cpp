@@ -8,6 +8,24 @@
 #include <vector>
 #include <utility>
 
+void main_brice() {
+	FIBITMAP* image;
+	short xScreen = 1000, yScreen = 1000, zScreen = 1000;
+	image = FreeImage_Allocate(xScreen, yScreen, 32);
+
+	std::vector<CSphere> mySpheres; // tableau de spheres
+	CSphere mysphere0(NewVector(200, 200, 150), 100); // creation sphere1
+	mySpheres.push_back(mysphere0); // ajout dans tableau
+
+	CCamera myCamera = CCamera(NewVector(200, 200, 0), xScreen, yScreen, 100);
+	mySpheres.push_back(mysphere0); // ajout dans tableau
+
+	CCamera myCamera = CCamera(NewVector(200, 200, 0), 10, 10, 100);
+
+	std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
+	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, visibility);
+}
+
 int main(int argc, char** argv)
 {
 
@@ -48,20 +66,4 @@ int main(int argc, char** argv)
 		myCamera.Iradiate(xScreen, yScreen, zScreen, image, mySpheres, visibility);
 		myLightSource.Illuminate(xScreen, yScreen, zScreen, image, visibility);
 	}
-}
-
-void main_brice() {
-	FIBITMAP* image;
-	short xScreen = 1000, yScreen = 1000, zScreen = 1000;
-	image = FreeImage_Allocate(xScreen, yScreen, 32);
-
-	std::vector<CSphere> mySpheres; // tableau de spheres
-	CSphere mysphere0(NewVector(200, 200, 150), 100); // creation sphere1
-	mySpheres.push_back(mysphere0); // ajout dans tableau
-
-	CCamera myCamera = CCamera(NewVector(200, 200, 0), xScreen, yScreen, 100);
-	CLightSource myLightSource(0, 1000, 0);
-
-	std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
-	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, visibility);
 }
