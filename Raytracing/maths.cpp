@@ -82,7 +82,7 @@ Vector3D operator+(const Vector3D& vector1, const Vector3D& vector2)
 float DistanceVectors(const Vector3D& vector1, const Vector3D& vector2)
 {
 	float distance;
-	distance = sqrt(pow(vector1.x - vector2.x, 2) + (vector2.y - vector2.y, 2) + (vector1.z - vector2.z, 2));
+	distance = sqrt((vector1.x - vector2.x)*(vector1.x - vector2.x) + (vector1.y - vector2.y)*(vector1.y - vector2.y) + (vector1.z - vector2.z)*(vector1.z - vector2.z));
 	return distance;
 }
 

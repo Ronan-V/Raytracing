@@ -42,14 +42,11 @@ int main(int argc, char** argv)
 
 		std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
 
-		// -------------------------- MAIN FUNCTIONS------------------------------
-		//myCamera.IradiateBrice(xScreen, yScreen, image, mySpheres, visibility, myCamera);
-		//myLightSource.Illuminate(xScreen, yScreen, image, visibility);
 
 		// -------------------------- MAIN FUNCTIONS------------------------------
 
 		myCamera.Iradiate(xScreen, yScreen, zScreen, image, mySpheres, visibility);
-		myLightSource.Illuminate(xScreen, yScreen, image, visibility);
+		myLightSource.Illuminate(xScreen, yScreen, zScreen, image, visibility);
 	}
 }
 
