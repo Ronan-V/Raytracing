@@ -8,84 +8,63 @@
 #include <vector>
 #include <utility>
 
-/*
 int main(int argc, char** argv)
 {
-	int width = 640;
-	int length = 480;
 
-	RGBQUAD color;
-	FIBITMAP* image = FreeImage_Allocate(width, length, 32);
-
-	CCamera camera = CCamera(NewVector(0, 0, 0), 0.5, 0.35, 1);
-
-	CScene myScene;
-	CSphere mySphere = CSphere(NewVector(0, 0, 10), 20);
-
-	for (size_t i = 0; i < width; i++)
+	if (false)
 	{
-		for (size_t j = 0; j < length; j++)
-		{
-			CRay ray = CRay(camera.get_position(), NormalizedVector(camera.UnitVectorCalculation(i, j, width, length)));
-			//std::cout << camera.UnitVectorCalculation(i, j, width, length).x;
-			// Quand la ray a une intersection avec notre objet (pour le moment sphere)
-			if (mySphere.SphereIntersectionBool(ray))
-			{
-				color.rgbRed = 255;
-				color.rgbGreen = 255;
-				color.rgbBlue = 255;
-			}
-			else
-			{
-				color.rgbRed = 0;
-				color.rgbGreen = 0;
-				color.rgbBlue = 0;
-			}
-
-			FreeImage_SetPixelColor(image, i, j, &color);
-		}
+		main_brice();
 	}
+	else
+	{
+		// -------------------------- FREEIMAGE -------------------------------
+		FIBITMAP* image;
+		short xScreen = 1000, yScreen = 1000, zScreen = 1000;
+		image = FreeImage_Allocate(xScreen, yScreen, 32);
 
-	FreeImage_Save(FIF_BMP, image, "out.bmp");
+		// -------------------------- INIT SPHERES-----------------------------
 
-	return EXIT_SUCCESS;
-}*/
+		std::vector<CSphere> mySpheres; // tableau de spheres
+		CSphere mysphere0(NewVector(500, 500, 500), 100); // creation sphere1
+		//CSphere mysphere1(NewVector(250, 500, 500), 100); // creation sphere2
+		//CSphere mysphere2(NewVector(750, 500, 500), 100); // creation sphere3
+		//CSphere mysphere3(NewVector(800, 800, 0), 200); // creation sphere4
+		mySpheres.push_back(mysphere0); // ajout dans tableau
+		//mySpheres.push_back(mysphere1); // ajout dans tableau
+		//mySpheres.push_back(mysphere2); // ajout dans tableau
+		//mySpheres.push_back(mysphere3); // ajout dans tableau
+		// -------------------------- INIT CAMERA AND LIGHTS------------------------------
 
-int main(int argc, char** argv)
-{
-	// -------------------------- FREEIMAGE -------------------------------
+		CCamera myCamera = CCamera(NewVector(0, 0, 0), 0.5, 0.35, 1);
+		CLightSource myLightSource(0, 1000, 0);
+
+		// -------------------------- INIT PAIRS ------------------------------
+
+		std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
+
+		// -------------------------- MAIN FUNCTIONS------------------------------
+		//myCamera.IradiateBrice(xScreen, yScreen, image, mySpheres, visibility, myCamera);
+		//myLightSource.Illuminate(xScreen, yScreen, image, visibility);
+
+		// -------------------------- MAIN FUNCTIONS------------------------------
+
+		myCamera.Iradiate(xScreen, yScreen, zScreen, image, mySpheres, visibility);
+		myLightSource.Illuminate(xScreen, yScreen, image, visibility);
+	}
+}
+
+void main_brice() {
 	FIBITMAP* image;
 	short xScreen = 1000, yScreen = 1000, zScreen = 1000;
 	image = FreeImage_Allocate(xScreen, yScreen, 32);
 
-	// -------------------------- INIT SPHERES-----------------------------
-
 	std::vector<CSphere> mySpheres; // tableau de spheres
-	CSphere mysphere0(NewVector(500, 500, 500) , 100); // creation sphere1
-	//CSphere mysphere1(NewVector(250, 500, 500), 100); // creation sphere2
-	//CSphere mysphere2(NewVector(750, 500, 500), 100); // creation sphere3
-	//CSphere mysphere3(NewVector(800, 800, 0), 200); // creation sphere4
+	CSphere mysphere0(NewVector(200, 200, 150), 100); // creation sphere1
 	mySpheres.push_back(mysphere0); // ajout dans tableau
-	//mySpheres.push_back(mysphere1); // ajout dans tableau
-	//mySpheres.push_back(mysphere2); // ajout dans tableau
-	//mySpheres.push_back(mysphere3); // ajout dans tableau
-	// -------------------------- INIT CAMERA AND LIGHTS------------------------------
 
-	CCamera myCamera = CCamera(NewVector(0, 0, 0), 0.5, 0.35, 1);
-	CLightSource myLightSource(0,1000,0);
-
-	// -------------------------- INIT PAIRS ------------------------------
+	CCamera myCamera = CCamera(NewVector(200, 200, 0), xScreen, yScreen, 100);
+	CLightSource myLightSource(0, 1000, 0);
 
 	std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
-
-	// -------------------------- MAIN FUNCTIONS------------------------------
-	//myCamera.IradiateBrice(xScreen, yScreen, image, mySpheres, visibility, myCamera);
-	//myLightSource.Illuminate(xScreen, yScreen, image, visibility);
-
-	// -------------------------- MAIN FUNCTIONS------------------------------
-
-	myCamera.Iradiate(xScreen, yScreen, zScreen, image, mySpheres, visibility);
-	myLightSource.Illuminate(xScreen, yScreen, image, visibility);
-
-	return EXIT_SUCCESS;
+	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, visibility);
 }
