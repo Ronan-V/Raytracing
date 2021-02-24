@@ -2,6 +2,8 @@
 #include "CObject.h"
 #include <FreeImage.h>
 #include <vector>
+#include "CSphere.h"
+#include "maths.h"
 
 class CLightSource :
 	public CObject

@@ -1,7 +1,4 @@
 ﻿#include "CLightSource.h"
-#include "FreeImage.h"
-#include <vector>
-#include "CSphere.h"
 
 CLightSource::CLightSource() : CObject(NewVector(0, 0, 0)) {
 }
@@ -42,7 +39,7 @@ void CLightSource::Illuminate(short xScreen, short yScreen, FIBITMAP* image, std
 		{
 			colorSetter.rgbBlue = 0;
 		}
-		
+
 		FreeImage_SetPixelColor(image, visibility->at(eachTuple).second.x, visibility->at(eachTuple).second.y, &colorSetter);
 		if ((visibility->at(eachTuple).second.x == 500) and (visibility->at(eachTuple).second.y == 500))
 		{
@@ -54,7 +51,7 @@ void CLightSource::Illuminate(short xScreen, short yScreen, FIBITMAP* image, std
 
 float CLightSource::Distance(Vector3D Light, Vector3D Intersection, short xScreen)
 {
-	int distance = (DistanceVectors(Intersection, Light)/xScreen)*10;
+	int distance = (DistanceVectors(Intersection, Light) / xScreen) * 10;
 
 	return (int)distance;
 }

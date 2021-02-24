@@ -31,21 +31,19 @@ CCamera::~CCamera()
 {
 }
 
-void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>> *visibility)
+void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility) //CCamera camera
 {
 	RGBQUAD colorSetter;
-	RGBQUAD colorGetter;
-	bool interOK; // bool intersection
 
 	for (size_t i = 0; i < xScreen; i++)
 	{
-
 		for (size_t j = 0; j < yScreen; j++)
 		{
 			Vector3D myOrigin = NewVector(i, j, 0);
 			Vector3D myDirection = NewVector(0, 0, zScreen);
 			Vector3D zero = NewVector(0, 0, 0);
 			CRay myRayon(myOrigin, myDirection);
+			//CRay myRayon = CRay(camera.get_position(), NormalizedVector(camera.UnitVectorCalculation(i, j, xScreen, yScreen)));
 			colorSetter.rgbRed = 0;
 			colorSetter.rgbGreen = 0;
 			colorSetter.rgbBlue = 0;
@@ -59,39 +57,6 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 					colorSetter.rgbGreen = 255;
 					colorSetter.rgbBlue = 255;
 					visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
-					FreeImage_SetPixelColor(image, i, j, &colorSetter);
-					break;
-				}
-			}
-		}
-	}
-	std::cout << "nombre de couples pixel:vecteur : " << visibility->size() << std::endl << std::endl;
-	//std::cout << "valeur du pixel rouge du couple 40 000 : " << visibility[40000].first.rgbRed << std::endl << std::endl;
-	FreeImage_Save(FIF_BMP, image, "out.bmp");
-}
-
-void CCamera::IradiateBrice(short xScreen, short yScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility, CCamera camera)
-{
-	RGBQUAD colorSetter;
-
-	for (size_t i = 0; i < xScreen; i++)
-	{
-		for (size_t j = 0; j < yScreen; j++)
-		{
-			CRay myRayon = CRay(camera.get_position(), NormalizedVector(camera.UnitVectorCalculation(i, j, xScreen, yScreen)));
-			colorSetter.rgbRed = 0;
-			colorSetter.rgbGreen = 0;
-			colorSetter.rgbBlue = 0;
-
-			for (size_t k = 0; k < mySpheres.size(); k++)
-			{
-				Vector3D Intersec = mySpheres[k].SphereIntersection(myRayon);
-				if (IsEgual(Intersec, zero) == false)
-				{
-					colorSetter.rgbRed = 255;
-					colorSetter.rgbGreen = 255;
-					colorSetter.rgbBlue = 255;
-					visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, Intersec));
 					FreeImage_SetPixelColor(image, i, j, &colorSetter);
 					break;
 				}
