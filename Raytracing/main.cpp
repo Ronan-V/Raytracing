@@ -17,9 +17,6 @@ void main_brice() {
 	CSphere mysphere0(NewVector(200, 200, 150), 100); // creation sphere1
 	mySpheres.push_back(mysphere0); // ajout dans tableau
 
-	CCamera myCamera = CCamera(NewVector(200, 200, 0), xScreen, yScreen, 100);
-	mySpheres.push_back(mysphere0); // ajout dans tableau
-
 	CCamera myCamera = CCamera(NewVector(200, 200, 0), 10, 10, 100);
 
 	std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
