@@ -52,6 +52,5 @@ void CLightSource::Illuminate(short xScreen, short yScreen, FIBITMAP* image, std
 float CLightSource::Distance(Vector3D Light, Vector3D Intersection, short xScreen)
 {
 	int distance = (DistanceVectors(Intersection, Light) / xScreen) * 10;
-
 	return (int)distance;
 }
