@@ -84,8 +84,7 @@ int main(int argc, char** argv)
 
 	// -------------------------- MAIN FUNCTIONS------------------------------
 
-	myCamera.Iradiate(xScreen, yScreen, zScreen, image, mySpheres, visibility);
-	myLightSource.Illuminate(xScreen, yScreen, image, visibility);
+	myCamera.Iradiate(xScreen, yScreen, image, mySpheres, visibility);
 
 	return EXIT_SUCCESS;
 }
