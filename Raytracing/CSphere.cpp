@@ -25,7 +25,7 @@ Vector3D CSphere::get_intersection_coordinates(CRay ray)
 
 	//Equation is: pow(t, 2) * (pow(rayDirection.x, 2) + pow(rayDirection.y, 2) + pow(rayDirection.z, 2)) + 2 * t * (X_zero * rayDirection.x + Y_zero * rayDirection.y + Z_zero * rayDirection.z) + (pow(X_zero, 2) + (pow(Y_zero, 2) + (pow(Z_zero, 2)) - pow(rayon, 2);
 	float a = pow(rayDirection.x, 2) + pow(rayDirection.y, 2) + pow(rayDirection.z, 2);
-	float b = (X_zero * rayDirection.x + Y_zero * rayDirection.y + Z_zero * rayDirection.z) / 4;
+	float b = (X_zero * rayDirection.x + Y_zero * rayDirection.y + Z_zero * rayDirection.z)*2;
 	float c = (pow(X_zero, 2) + pow(Y_zero, 2) + pow(Z_zero, 2)) - pow(rayon, 2);
 
 	float det = pow(b, 2) - 4 * a * c;
@@ -34,11 +34,13 @@ Vector3D CSphere::get_intersection_coordinates(CRay ray)
 	if (det == 0) // 1 intersection
 	{
 		t = -b / (2 * a);
+		//std::cout << "1 intersection  : t = " << t << std::endl;
 	}
 	else if (det > 0) // 2 intersections
 	{
 		float t1 = (-b + sqrt(det)) / (2 * a);
 		float t2 = (-b - sqrt(det)) / (2 * a);
+		//std::cout << "2 intersections  : t1 = " << t1 << "t2 = " << t2 << std::endl;
 		if (t1 < t2) t = t1;
 		else t = t2;
 	}

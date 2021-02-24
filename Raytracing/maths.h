@@ -19,3 +19,4 @@ bool operator==(const Vector3D& vector1, const Vector3D& vector2);
 bool operator!=(const Vector3D& vector1, const Vector3D& vector2);
 Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVector);
 Vector3D RefractedRay(const Vector3D& incidentVector, const Vector3D& normalVector, float RefractiveIndexN1, float RefractiveIndexN2);
+float DistanceVectors(const Vector3D& vector1, const Vector3D& vector2);
