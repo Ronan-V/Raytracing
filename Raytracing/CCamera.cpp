@@ -8,7 +8,7 @@ CCamera::CCamera() {
 
 Vector3D CCamera::get_top_left_point()
 {
-	return this->position + ((viewplaneDist * vecDir) + (viewplaneHeight / 2) * upVec) - ((viewplaneWidth / 2) * rightVec);
+	return this->position + ((viewplaneDist * vecDir) + ((viewplaneHeight / 2) * upVec)) - ((viewplaneWidth / 2) * rightVec);
 }
 
 Vector3D CCamera::UnitVectorCalculation(float x, float y, float xRes = 640, float yRes = 480)
@@ -16,7 +16,7 @@ Vector3D CCamera::UnitVectorCalculation(float x, float y, float xRes = 640, floa
 	float xIndent = viewplaneWidth / xRes;
 	float yIndent = viewplaneHeight / yRes;
 
-	return (this->topLeftPos + x * xIndent * rightVec - y * yIndent * upVec);
+	return (this->topLeftPos + (x * xIndent * rightVec) - (y * yIndent * upVec)) - position;
 }
 
 CCamera::CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist) : CObject(position)
@@ -37,7 +37,7 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 
 	for (size_t i = 0; i < xScreen; i++)
 	{
-		for (size_t j = 0; j < yScreen; j++)
+		for (size_t j = yScreen; j > 0; j--)
 		{
 			Vector3D myOrigin = NewVector(i, j, 0);
 			Vector3D myDirection = NewVector(0, 0, zScreen);
@@ -85,7 +85,7 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 	{
 		for (size_t j = 0; j < yScreen; j++)
 		{
-			CRay myRayon = CRay(this->position, NormalizedVector(this->UnitVectorCalculation(i, j, xScreen, yScreen)));
+			CRay myRayon = CRay(this->position, NormalizedVector(this->UnitVectorCalculation(i, j, (float)xScreen, (float)yScreen)));
 			colorSetter.rgbRed = 0;
 			colorSetter.rgbGreen = 0;
 			colorSetter.rgbBlue = 0;

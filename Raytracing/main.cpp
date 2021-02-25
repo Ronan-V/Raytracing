@@ -15,10 +15,11 @@ void main_brice() {
 	image = FreeImage_Allocate(xScreen, yScreen, 32);
 
 	std::vector<CSphere> mySpheres; // tableau de spheres
-	CSphere mysphere0(NewVector(200, 200, 150), 100); // creation sphere1
+	CSphere mysphere0(NewVector(500, 500, 300), 50); // creation sphere1
 	mySpheres.push_back(mysphere0); // ajout dans tableau
 
-	CCamera myCamera = CCamera(NewVector(200, 200, 0), 10, 10, 100);
+	CCamera myCamera = CCamera(NewVector(500, 0, 0), 300, 300, 50);
+	//CLightSource myLightSource(0, 1000, 0);
 
 	std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
 	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, visibility);
