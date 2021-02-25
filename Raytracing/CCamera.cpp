@@ -54,7 +54,7 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 				if (sphere.has_intersection(myRayon))
 				{
 					colorSetter.rgbRed = 255;
-					colorSetter.rgbGreen = 255;
+					colorSetter.rgbGreen = 0;
 					colorSetter.rgbBlue = 255;
 					visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
 					FreeImage_SetPixelColor(image, i, j, &colorSetter);

@@ -7,13 +7,12 @@ class CPlan :
 	public CObject
 {
 private:
-	Vector3D root;
-	float longueur;
-	float largeur;
+	Vector3D rootbg;
+	Vector3D roothd;
 
 public:
 	CPlan();
-	CPlan(Vector3D root, float longueur, float largeur);
+	CPlan(Vector3D rootbg, Vector3D roothd);
 	~CPlan();
 	
 	Vector3D get_intersection_coordinates(CRay ray);

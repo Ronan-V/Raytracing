@@ -17,31 +17,35 @@ void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBIT
 	RGBQUAD colorSetter;
 	bool interOK; // bool intersection
 	float factor = sqrt(zScreen * zScreen + xScreen * xScreen);
-	std::cout << factor << std::endl;
 	factor /= 255;
-	std::cout << factor << std::endl;
-	for (int eachTuple = 0; eachTuple < visibility->size(); eachTuple++)
+	for (long eachTuple = 0; eachTuple < visibility->size(); eachTuple++)
 	{
+
 		int luminosity = Distance(this->position, visibility->at(eachTuple).second, xScreen);
+
+		int newFactor;
+		newFactor = luminosity / factor;
+		
+		if (newFactor > 255){ newFactor = 255;}
+		else if (newFactor < 0){ newFactor = 0;}
+
 		colorGetter.rgbRed = visibility->at(eachTuple).first.rgbRed;
 		colorGetter.rgbGreen = visibility->at(eachTuple).first.rgbGreen;
 		colorGetter.rgbBlue = visibility->at(eachTuple).first.rgbBlue;
-		colorSetter.rgbRed = colorGetter.rgbRed - luminosity / factor;
-		colorSetter.rgbGreen = colorGetter.rgbGreen - luminosity / factor;
-		colorSetter.rgbBlue = colorGetter.rgbBlue - luminosity / factor;
 
-		if (colorSetter.rgbRed < 0)
-		{
-			colorSetter.rgbRed = 0;
-		}
-		if (colorSetter.rgbGreen < 0)
-		{
-			colorSetter.rgbGreen = 0;
-		}
-		if (colorSetter.rgbBlue < 0)
-		{
-			colorSetter.rgbBlue = 0;
-		}
+		int newRed, newGreen, newBlue;
+		newRed = colorGetter.rgbRed - newFactor;
+		newGreen = colorGetter.rgbGreen - newFactor;
+		newBlue = colorGetter.rgbBlue - newFactor;
+
+		if (newRed < 0) { newRed = 0; };
+		if (newGreen < 0) { newGreen = 0; };
+		if (newBlue < 0) { newBlue = 0; };
+
+		colorSetter.rgbRed = newRed;
+		colorSetter.rgbGreen = newGreen;
+		colorSetter.rgbBlue = newBlue;
+
 
 		FreeImage_SetPixelColor(image, visibility->at(eachTuple).second.x, visibility->at(eachTuple).second.y, &colorSetter);
 	}
