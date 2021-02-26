@@ -1,17 +1,9 @@
-#include "CPlan.h"
-
-CPlan::CPlan()
-{
-}
+﻿#include "CPlan.h"
 
 CPlan::CPlan(Vector3D rootbg, Vector3D roothd)
 {
 	this->rootbg = rootbg;
 	this->roothd = roothd;
-}
-
-CPlan::~CPlan()
-{
 }
 
 Vector3D CPlan::get_intersection_coordinates(CRay ray)
@@ -48,7 +40,7 @@ Vector3D CPlan::get_intersection_coordinates_Ronan(CRay& ray)
 		this->hasIntersection = false;
 		return NewVector(0, 0, 0);
 	}
-	float mabite = ScalarProduct(normal, rayOrigin - pointOnPlane);
+	float debug_ronan = ScalarProduct(normal, rayOrigin - pointOnPlane);
 	float t = (-(ScalarProduct(normal, rayOrigin - pointOnPlane))) / tmp;
 
 	if (t < 0)

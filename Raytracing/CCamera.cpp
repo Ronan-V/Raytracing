@@ -1,8 +1,5 @@
 ﻿#include "CCamera.h"
 
-CCamera::CCamera() {
-}
-
 Vector3D CCamera::get_top_left_point()
 {
 	return this->position + ((viewplaneDist * vecDir) + ((viewplaneHeight / 2) * upVec)) - ((viewplaneWidth / 2) * rightVec);
@@ -22,10 +19,6 @@ CCamera::CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight,
 	this->viewplaneHeight = viewplaneHeight;
 	this->viewplaneDist = viewplaneDist;
 	this->topLeftPos = get_top_left_point();
-}
-
-CCamera::~CCamera()
-{
 }
 
 void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility) //CCamera camera
@@ -91,7 +84,7 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 			for (CPlan plan : myPlans)
 			{
 				Vector3D intersection = plan.get_intersection_coordinates_Ronan(myRay);
-				if (plan.has_intersection() && intersection != NewVector(0,0,0))
+				if (plan.has_intersection() && intersection != NewVector(0, 0, 0))
 				{
 					colorSetter.rgbRed = 173;
 					colorSetter.rgbGreen = 79;

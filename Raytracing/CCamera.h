@@ -22,10 +22,11 @@ private:
 
 	Vector3D get_top_left_point();
 public:
-	CCamera();
+	CCamera() = default;
+	~CCamera() = default;
+
 	Vector3D UnitVectorCalculation(float x, float y, float xRes, float yRes);
 	CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist);
-	~CCamera();
 	//void Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair<RGBQUAD, Vector3D>>* visibility, CCamera camera);
 	void Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility);
 	void IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::pair<RGBQUAD, Vector3D>>* visibility);

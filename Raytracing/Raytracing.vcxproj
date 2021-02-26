@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CIntersectionObject.cpp" />
     <ClCompile Include="CLightSource.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CRay.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="CMaterials.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPlan.h" />
+    <ClInclude Include="CIntersectionObject.h" />
     <ClInclude Include="CRay.h" />
     <ClInclude Include="CSphere.h" />
     <ClInclude Include="maths.h" />

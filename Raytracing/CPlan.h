@@ -1,10 +1,9 @@
-#pragma once
-#include "CObject.h"
-#include "CRay.h"
+﻿#pragma once
+#include "CIntersectionObject.h"
 #include <iostream>
 
 class CPlan :
-	public CObject
+	public CIntersectionObject
 {
 private:
 	Vector3D rootbg;
@@ -15,10 +14,11 @@ private:
 	Vector3D pointOnPlane;
 
 public:
-	CPlan();
+	CPlan() = default;
+	~CPlan() = default;
+
 	CPlan(Vector3D rootbg, Vector3D roothd);
-	~CPlan();
-	
+
 	Vector3D get_intersection_coordinates(CRay ray);
 
 	//Ronan

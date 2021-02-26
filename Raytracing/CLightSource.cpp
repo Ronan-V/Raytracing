@@ -7,10 +7,6 @@ CLightSource::CLightSource(short x, short y, short z) : CObject(NewVector(x, y, 
 {
 }
 
-CLightSource::~CLightSource()
-{
-}
-
 void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility)
 {
 	RGBQUAD colorGetter;
@@ -25,9 +21,9 @@ void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBIT
 
 		int newFactor;
 		newFactor = luminosity / factor;
-		
-		if (newFactor > 255){ newFactor = 255;}
-		else if (newFactor < 0){ newFactor = 0;}
+
+		if (newFactor > 255) { newFactor = 255; }
+		else if (newFactor < 0) { newFactor = 0; }
 
 		colorGetter.rgbRed = visibility->at(eachTuple).first.rgbRed;
 		colorGetter.rgbGreen = visibility->at(eachTuple).first.rgbGreen;
@@ -54,6 +50,5 @@ void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBIT
 
 float CLightSource::Distance(Vector3D Light, Vector3D Intersection, short xScreen)
 {
-	float distance = (DistanceVectors(Intersection, Light));
-	return (int)distance;
+	return DistanceVectors(Intersection, Light);
 }

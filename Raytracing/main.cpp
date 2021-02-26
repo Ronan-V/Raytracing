@@ -26,7 +26,7 @@ void main_brice() {
 	CPlan myPlan0(NewVector(500, 300, 500), NewVector(0, -1, 0), true); //Un point sur le plan et la normal au plan
 	myPlans.push_back(myPlan0);
 
-	std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
+	auto* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
 	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, myPlans, visibility);
 }
 
@@ -40,7 +40,7 @@ int main(int argc, char** argv)
 	else
 	{
 		// -------------------------- FREEIMAGE -------------------------------
-		
+
 		FIBITMAP* image;
 		short xScreen = 3840, yScreen = 2160, zScreen = 3000;
 		image = FreeImage_Allocate(xScreen, yScreen, 32);
@@ -66,13 +66,13 @@ int main(int argc, char** argv)
 
 		// -------------------------- INIT PAIRS ------------------------------
 
-		std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
+		auto* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
 
 		// -------------------------- INIT PLANS -----------------------------
 
 		std::vector<CPlan> myPlans;
 		CPlan myplan0(NewVector(0, 0, 1000), NewVector(1000, 1000, 1000));
-		
+
 		// -------------------------- MAIN FUNCTIONS------------------------------
 
 		myCamera.Iradiate(xScreen, yScreen, zScreen, image, mySpheres, visibility);
