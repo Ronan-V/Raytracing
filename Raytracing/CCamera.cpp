@@ -1,7 +1,4 @@
 ﻿#include "CCamera.h"
-#include <FreeImage.h>
-#include <vector>
-#include "CSphere.h"
 
 CCamera::CCamera() {
 }
@@ -37,7 +34,7 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 
 	for (size_t i = 0; i < xScreen; i++)
 	{
-		for (size_t j = yScreen; j > 0; j--)
+		for (size_t j = 0; j < yScreen; j++)
 		{
 			Vector3D myOrigin = NewVector(i, j, 0);
 			Vector3D myDirection = NewVector(0, 0, zScreen);
@@ -77,23 +74,37 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 /// <param name="mySpheres"></param>
 /// <param name="visibility"></param>
 /// <param name="camera"></param>
-void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility) //CCamera camera
+void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility) //CCamera camera
 {
 	RGBQUAD colorSetter;
+	std::cout << myPlans.size();
 
 	for (size_t i = 0; i < xScreen; i++)
 	{
-		for (size_t j = 0; j < yScreen; j++)
+		for (size_t j = yScreen; j > 0; j--)
 		{
-			CRay myRayon = CRay(this->position, NormalizedVector(this->UnitVectorCalculation(i, j, (float)xScreen, (float)yScreen)));
+			CRay myRay = CRay(this->position, Normalize(this->UnitVectorCalculation(i, j, (float)xScreen, (float)yScreen)));
 			colorSetter.rgbRed = 0;
 			colorSetter.rgbGreen = 0;
 			colorSetter.rgbBlue = 0;
 
+			for (CPlan plan : myPlans)
+			{
+				Vector3D intersection = plan.get_intersection_coordinates_Ronan(myRay);
+				if (plan.has_intersection() && intersection != NewVector(0,0,0))
+				{
+					colorSetter.rgbRed = 173;
+					colorSetter.rgbGreen = 79;
+					colorSetter.rgbBlue = 9;
+					visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
+					FreeImage_SetPixelColor(image, i, j, &colorSetter);
+				}
+			}
+
 			for (CSphere sphere : mySpheres)
 			{
-				Vector3D intersection = sphere.get_intersection_coordinates(myRayon);
-				if (sphere.has_intersection(myRayon))
+				Vector3D intersection = sphere.get_intersection_coordinates(myRay);
+				if (sphere.has_intersection(myRay))
 				{
 					colorSetter.rgbRed = 255;
 					colorSetter.rgbGreen = 255;

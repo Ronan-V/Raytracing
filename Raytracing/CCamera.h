@@ -3,6 +3,8 @@
 #include <FreeImage.h>
 #include <vector>
 #include "CSphere.h"
+#include "CPlan.h"
+
 class CCamera :
 	public CObject
 {
@@ -26,5 +28,5 @@ public:
 	~CCamera();
 	//void Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair<RGBQUAD, Vector3D>>* visibility, CCamera camera);
 	void Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility);
-	void IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair<RGBQUAD, Vector3D>>* visibility);
+	void IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::pair<RGBQUAD, Vector3D>>* visibility);
 };

@@ -7,12 +7,12 @@ Vector3D NewVector(float x, float y, float z)
 	return newVector;
 }
 
-inline float GetNorme(const Vector3D& v)
+float GetNorme(const Vector3D& v)
 {
 	return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
-inline Vector3D NormalizedVector(const Vector3D& vector)
+Vector3D Normalize(const Vector3D& vector)
 {
 	Vector3D normalizedVector;
 
@@ -28,7 +28,7 @@ inline Vector3D NormalizedVector(const Vector3D& vector)
 	return normalizedVector;
 }
 
-inline float ScalarProduct(const Vector3D& vector1, const Vector3D& vector2) // MA.MB
+float ScalarProduct(const Vector3D& vector1, const Vector3D& vector2) // MA.MB
 {
 	return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z * vector2.z;
 }
@@ -109,8 +109,8 @@ Vector3D ReflectedRay(const Vector3D& incidentVector, const Vector3D& normalVect
 Vector3D RefractedRay(const Vector3D& incidentVector, const Vector3D& normalVector, float RefractiveIndexN1, float RefractiveIndexN2)
 {
 	float Scalar = ScalarProduct(incidentVector, normalVector); //cos(Teta) = (u.v) / ||u|| . ||v||
-	Vector3D NormInci = NormalizedVector(incidentVector);
-	Vector3D NormNormal = NormalizedVector(normalVector);
+	Vector3D NormInci = Normalize(incidentVector);
+	Vector3D NormNormal = Normalize(normalVector);
 	float NormScalar = ScalarProduct(NormInci, NormNormal);
 	float CosTeta = Scalar / NormScalar;
 	float Teta1 = acos(CosTeta);

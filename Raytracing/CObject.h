@@ -3,6 +3,7 @@
 class CObject {
 protected:
 	Vector3D position;
+	bool hasIntersection = false;
 public:
 	CObject();
 	CObject(Vector3D position);

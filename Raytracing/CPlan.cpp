@@ -29,3 +29,39 @@ Vector3D CPlan::get_intersection_coordinates(CRay ray)
 		}
 	}
 }
+
+CPlan::CPlan(const Vector3D& pointOnPlane, const Vector3D& normal, bool DifferenciationConstructeurTemporaire)
+{
+	this->normal = Normalize(normal);
+	this->pointOnPlane = pointOnPlane;
+}
+
+Vector3D CPlan::get_intersection_coordinates_Ronan(CRay& ray)
+{
+	Vector3D rayDirection = ray.GetDirection();
+	Vector3D rayOrigin = ray.get_position();
+
+	float tmp = ScalarProduct(normal, rayDirection);
+
+	if (tmp == 0)
+	{
+		this->hasIntersection = false;
+		return NewVector(0, 0, 0);
+	}
+	float mabite = ScalarProduct(normal, rayOrigin - pointOnPlane);
+	float t = (-(ScalarProduct(normal, rayOrigin - pointOnPlane))) / tmp;
+
+	if (t < 0)
+	{
+		this->hasIntersection = false;
+		return NewVector(0, 0, 0);
+	}
+
+	this->hasIntersection = true;
+	return rayOrigin + (t * rayDirection);
+}
+
+bool CPlan::has_intersection()
+{
+	return this->hasIntersection;
+}

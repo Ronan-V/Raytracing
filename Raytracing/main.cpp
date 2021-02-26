@@ -18,17 +18,22 @@ void main_brice() {
 	CSphere mysphere0(NewVector(500, 500, 300), 50); // creation sphere1
 	mySpheres.push_back(mysphere0); // ajout dans tableau
 
-	CCamera myCamera = CCamera(NewVector(500, 0, 0), 300, 300, 50);
+	CCamera myCamera = CCamera(NewVector(500, 500, 500), 300, 300, 50);
 	//CLightSource myLightSource(0, 1000, 0);
 
+	std::vector<CPlan> myPlans;
+	//CPlan myplan0(NewVector(0, 0, 1000), NewVector(1000, 1000, 1000));
+	CPlan myPlan0(NewVector(500, 300, 500), NewVector(0, -1, 0), true); //Un point sur le plan et la normal au plan
+	myPlans.push_back(myPlan0);
+
 	std::vector<std::pair <RGBQUAD, Vector3D>>* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
-	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, visibility);
+	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, myPlans, visibility);
 }
 
 int main(int argc, char** argv)
 {
 
-	if (false)
+	if (true)
 	{
 		main_brice();
 	}
@@ -67,7 +72,7 @@ int main(int argc, char** argv)
 
 		std::vector<CPlan> myPlans;
 		CPlan myplan0(NewVector(0, 0, 1000), NewVector(1000, 1000, 1000));
-
+		
 		// -------------------------- MAIN FUNCTIONS------------------------------
 
 		myCamera.Iradiate(xScreen, yScreen, zScreen, image, mySpheres, visibility);
