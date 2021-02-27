@@ -1,50 +1,12 @@
 ﻿#include "CPlan.h"
 
-CPlan::CPlan(Vector3D rootbg, Vector3D roothd)
-{
-	this->rootbg = rootbg;
-	this->roothd = roothd;
-}
-
-Vector3D CPlan::get_intersection_coordinates(CRay ray)
-{
-	Vector3D rayDirection = ray.GetDirection();
-	Vector3D rayOrigin = ray.get_position();
-
-	for (float pixel = rayOrigin.z; pixel <= rayDirection.z; pixel++)
-	{
-		if (pixel == this->rootbg.z)
-			return (NewVector(rayOrigin.x, rayOrigin.y, pixel));
-		else
-		{
-			return (NewVector(0, 0, 0));
-		}
-	}
-}
-
-/*Vector3D CPlan::get_intersection_coordinates(CRay ray)
-{
-	Vector3D rayDirection = ray.GetDirection();
-	Vector3D rayOrigin = ray.get_position();
-
-	for (float pixel = rayOrigin.z; pixel <= rayDirection.z; pixel++)
-	{
-		if (pixel == this->rootbg.z)
-			return (NewVector(rayOrigin.x, rayOrigin.y, pixel));
-		else
-		{
-			return (NewVector(0, 0, 0));
-		}
-	}
-}*/
-
-CPlan::CPlan(const Vector3D& pointOnPlane, const Vector3D& normal, bool DifferenciationConstructeurTemporaire)
+CPlan::CPlan(const Vector3D& pointOnPlane, const Vector3D& normal)
 {
 	this->normal = Normalize(normal);
 	this->pointOnPlane = pointOnPlane;
 }
 
-Vector3D CPlan::get_intersection_coordinates_Ronan(CRay& ray)
+Vector3D CPlan::get_intersection_coordinates(CRay ray)
 {
 	Vector3D rayDirection = ray.GetDirection();
 	Vector3D rayOrigin = ray.get_position();
@@ -62,10 +24,5 @@ Vector3D CPlan::get_intersection_coordinates_Ronan(CRay& ray)
 	}
 
 	this->hasIntersection = false;
-	return NewVector(0, 0, 0);
-}
-
-bool CPlan::has_intersection()
-{
-	return this->hasIntersection;
+	return NULL_VECTOR;
 }

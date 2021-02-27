@@ -1,6 +1,6 @@
 ﻿#include "CLightSource.h"
 
-CLightSource::CLightSource() : CObject(NewVector(0, 0, 0)) {
+CLightSource::CLightSource() : CObject(NULL_VECTOR) {
 }
 
 CLightSource::CLightSource(short x, short y, short z) : CObject(NewVector(x, y, z))
@@ -16,7 +16,7 @@ void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBIT
 	for (long eachTuple = 0; eachTuple < visibility->size(); eachTuple++)
 	{
 
-		int luminosity = Distance(this->position, visibility->at(eachTuple).second);
+		int luminosity = DistanceVectors(this->position, visibility->at(eachTuple).second);
 
 		int newFactor;
 		newFactor = luminosity / factor;
@@ -47,11 +47,6 @@ void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBIT
 	FreeImage_Save(FIF_BMP, image, "3d.bmp");
 }
 
-float CLightSource::Distance(Vector3D Light, Vector3D Intersection)
-{
-	return DistanceVectors(Intersection, Light);
-}
-
 void CLightSource::ReflectedLight(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility)
 {
 	RGBQUAD colorSetter;
@@ -65,7 +60,7 @@ void CLightSource::ReflectedLight(short xScreen, short yScreen, short zScreen, F
 
 		 // BLOC A REMPLACER PAR "SI INTERSECTION AU PLAN ECRAN (xScreen, yScreen) par rayon ReflectedLight" alors --les lignes dans le if--
 
-		/*while (visibility->at(eachTuple).second.z + ReflectedLight.z > 0) 
+		/*while (visibility->at(eachTuple).second.z + ReflectedLight.z > 0)
 		{
 			ReflectedLight.x = ReflectedLight.x - 1;
 			ReflectedLight.y = ReflectedLight.y - 1;

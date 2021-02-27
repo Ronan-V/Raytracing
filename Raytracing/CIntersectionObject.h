@@ -8,6 +8,8 @@
 class CIntersectionObject
 	: public CObject
 {
+protected:
+	bool hasIntersection = false;
 public:
 	CIntersectionObject() = default;
 	~CIntersectionObject() = default;
@@ -31,4 +33,6 @@ public:
 	/// <param name="ray">The ray</param>
 	/// <returns>true if the ray intersects with the object, false else</returns>
 	bool has_intersection(CRay ray);
+
+	bool has_intersection();
 };

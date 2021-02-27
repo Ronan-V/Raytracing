@@ -3,10 +3,14 @@
 #include <math.h>
 
 struct Vector3D {
-	float x, y, z = 0;
+	float x;
+	float y;
+	float z;
 };
 
 Vector3D NewVector(float x, float y, float z);
+const Vector3D NULL_VECTOR = NewVector(0, 0, 0);
+
 float GetNorme(const Vector3D& v);
 Vector3D Normalize(const Vector3D& vector);
 float ScalarProduct(const Vector3D& vector1, const Vector3D& vector2);

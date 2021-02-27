@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "CScene.h"
+#include "maths.h"
 
 enum TypeReflexion
 {

@@ -1,6 +1,6 @@
 ﻿#include "CCamera.h"
 
-Vector3D CCamera::calculate_normalised_unit_vector(float x, float y, float xRes = 640, float yRes = 480)
+Vector3D CCamera::calculate_normalised_unit_vector(float x, float y, float xRes, float yRes)
 {
 	float xIndent = viewplaneWidth / xRes;
 	float yIndent = viewplaneHeight / yRes;
@@ -26,9 +26,7 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 		{
 			Vector3D myOrigin = NewVector(i, j, 0);
 			Vector3D myDirection = NewVector(0, 0, zScreen);
-			Vector3D zero = NewVector(0, 0, 0);
 			CRay myRayon(myOrigin, myDirection);
-			//CRay myRayon = CRay(camera.get_position(), NormalizedVector(camera.UnitVectorCalculation(i, j, xScreen, yScreen)));
 			colorSetter.rgbRed = 0;
 			colorSetter.rgbGreen = 0;
 			colorSetter.rgbBlue = 0;
@@ -78,8 +76,8 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 
 			for (CPlan plan : myPlans)
 			{
-				Vector3D intersection = plan.get_intersection_coordinates_Ronan(myRay);
-				if (plan.has_intersection() && intersection != NewVector(0, 0, 0))
+				Vector3D intersection = plan.get_intersection_coordinates(myRay);
+				if (plan.has_intersection())
 				{
 					colorSetter.rgbRed = 13;
 					colorSetter.rgbGreen = 179;

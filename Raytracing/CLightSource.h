@@ -8,15 +8,11 @@
 class CLightSource :
 	public CObject
 {
-private:
-
 public:
 	CLightSource();
 	~CLightSource() = default;
 
-	void Illuminate();
 	CLightSource(short x, short y, short z);
 	void Illuminate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility);
-	float Distance(Vector3D Light, Vector3D Intersection);
 	void ReflectedLight(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility);
 };

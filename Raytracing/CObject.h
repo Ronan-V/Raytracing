@@ -10,9 +10,6 @@ protected:
 	/// The object's position
 	/// </summary>
 	Vector3D position;
-
-	//TODO ???
-	bool hasIntersection = false;
 public:
 	CObject() = default;
 	~CObject() = default;

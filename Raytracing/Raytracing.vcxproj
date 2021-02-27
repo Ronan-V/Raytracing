@@ -151,7 +151,6 @@
     <ClCompile Include="CSphere.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CMaterials.cpp" />
-    <ClCompile Include="CScene.cpp" />
     <ClCompile Include="maths.cpp" />
     <ClCompile Include="CPlan.cpp" />
   </ItemGroup>
@@ -165,7 +164,6 @@
     <ClInclude Include="CRay.h" />
     <ClInclude Include="CSphere.h" />
     <ClInclude Include="maths.h" />
-    <ClInclude Include="CScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
