@@ -33,7 +33,7 @@ void main_brice() {
 int main(int argc, char** argv)
 {
 
-	if (false)
+	if (true)
 	{
 		main_brice();
 	}
