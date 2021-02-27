@@ -1,13 +1,17 @@
-#pragma once
+﻿#pragma once
 #include "CScene.h"
 
-class CMaterials :
-	public CScene
+enum TypeReflexion
 {
-private:
-
-public:
-	CMaterials();
-	~CMaterials();
+	diffuse
 };
 
+class CMaterials
+{
+private:
+	Vector3D viewPointDirection;
+	Vector3D lightSourceDirection;
+public:
+	CMaterials() = default;
+	~CMaterials() = default;
+};

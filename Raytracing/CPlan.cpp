@@ -11,7 +11,7 @@ Vector3D CPlan::get_intersection_coordinates(CRay ray)
 	Vector3D rayDirection = ray.GetDirection();
 	Vector3D rayOrigin = ray.get_position();
 
-	for (int pixel = rayOrigin.z; pixel <= rayDirection.z; pixel++)
+	for (float pixel = rayOrigin.z; pixel <= rayDirection.z; pixel++)
 	{
 		if (pixel == this->rootbg.z)
 			return (NewVector(rayOrigin.x, rayOrigin.y, pixel));
@@ -21,6 +21,22 @@ Vector3D CPlan::get_intersection_coordinates(CRay ray)
 		}
 	}
 }
+
+/*Vector3D CPlan::get_intersection_coordinates(CRay ray)
+{
+	Vector3D rayDirection = ray.GetDirection();
+	Vector3D rayOrigin = ray.get_position();
+
+	for (float pixel = rayOrigin.z; pixel <= rayDirection.z; pixel++)
+	{
+		if (pixel == this->rootbg.z)
+			return (NewVector(rayOrigin.x, rayOrigin.y, pixel));
+		else
+		{
+			return (NewVector(0, 0, 0));
+		}
+	}
+}*/
 
 CPlan::CPlan(const Vector3D& pointOnPlane, const Vector3D& normal, bool DifferenciationConstructeurTemporaire)
 {
@@ -34,23 +50,19 @@ Vector3D CPlan::get_intersection_coordinates_Ronan(CRay& ray)
 	Vector3D rayOrigin = ray.get_position();
 
 	float tmp = ScalarProduct(normal, rayDirection);
-
-	if (tmp == 0)
+	if (tmp != 0)
 	{
-		this->hasIntersection = false;
-		return NewVector(0, 0, 0);
-	}
-	float debug_ronan = ScalarProduct(normal, rayOrigin - pointOnPlane);
-	float t = (-(ScalarProduct(normal, rayOrigin - pointOnPlane))) / tmp;
+		float t = (-(ScalarProduct(normal, rayOrigin - pointOnPlane))) / tmp;
 
-	if (t < 0)
-	{
-		this->hasIntersection = false;
-		return NewVector(0, 0, 0);
+		if (t >= 0)
+		{
+			this->hasIntersection = true;
+			return rayOrigin + (t * rayDirection);
+		}
 	}
 
-	this->hasIntersection = true;
-	return rayOrigin + (t * rayDirection);
+	this->hasIntersection = false;
+	return NewVector(0, 0, 0);
 }
 
 bool CPlan::has_intersection()

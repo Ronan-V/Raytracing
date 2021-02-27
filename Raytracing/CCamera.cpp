@@ -1,16 +1,11 @@
 ﻿#include "CCamera.h"
 
-Vector3D CCamera::get_top_left_point()
-{
-	return this->position + ((viewplaneDist * vecDir) + ((viewplaneHeight / 2) * upVec)) - ((viewplaneWidth / 2) * rightVec);
-}
-
-Vector3D CCamera::UnitVectorCalculation(float x, float y, float xRes = 640, float yRes = 480)
+Vector3D CCamera::calculate_normalised_unit_vector(float x, float y, float xRes = 640, float yRes = 480)
 {
 	float xIndent = viewplaneWidth / xRes;
 	float yIndent = viewplaneHeight / yRes;
 
-	return (this->topLeftPos + (x * xIndent * rightVec) - (y * yIndent * upVec)) - position;
+	return Normalize((this->topLeftPos + (x * xIndent * rightVec) - (y * yIndent * upVec)) - position);
 }
 
 CCamera::CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist) : CObject(position)
@@ -18,7 +13,7 @@ CCamera::CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight,
 	this->viewplaneWidth = viewplaneWidth;
 	this->viewplaneHeight = viewplaneHeight;
 	this->viewplaneDist = viewplaneDist;
-	this->topLeftPos = get_top_left_point();
+	this->topLeftPos = this->position + ((viewplaneDist * vecDir) + ((viewplaneHeight / 2) * upVec)) - ((viewplaneWidth / 2) * rightVec);
 }
 
 void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility) //CCamera camera
@@ -76,7 +71,7 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 	{
 		for (size_t j = 0; j < yScreen; j++)
 		{
-			CRay myRay = CRay(this->position, Normalize(this->UnitVectorCalculation(xScreen - i, yScreen - j, (float)xScreen, (float)yScreen)));
+			CRay myRay = CRay(this->position, calculate_normalised_unit_vector(xScreen - i, yScreen - j, (float)xScreen, (float)yScreen));
 			colorSetter.rgbRed = 0;
 			colorSetter.rgbGreen = 0;
 			colorSetter.rgbBlue = 0;
