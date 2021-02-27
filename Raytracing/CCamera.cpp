@@ -74,9 +74,9 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 
 	for (size_t i = 0; i < xScreen; i++)
 	{
-		for (size_t j = yScreen; j > 0; j--)
+		for (size_t j = 0; j < yScreen; j++)
 		{
-			CRay myRay = CRay(this->position, Normalize(this->UnitVectorCalculation(i, j, (float)xScreen, (float)yScreen)));
+			CRay myRay = CRay(this->position, Normalize(this->UnitVectorCalculation(xScreen - i, yScreen - j, (float)xScreen, (float)yScreen)));
 			colorSetter.rgbRed = 0;
 			colorSetter.rgbGreen = 0;
 			colorSetter.rgbBlue = 0;
@@ -86,9 +86,9 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 				Vector3D intersection = plan.get_intersection_coordinates_Ronan(myRay);
 				if (plan.has_intersection() && intersection != NewVector(0, 0, 0))
 				{
-					colorSetter.rgbRed = 173;
-					colorSetter.rgbGreen = 79;
-					colorSetter.rgbBlue = 9;
+					colorSetter.rgbRed = 13;
+					colorSetter.rgbGreen = 179;
+					colorSetter.rgbBlue = 93;
 					visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
 					FreeImage_SetPixelColor(image, i, j, &colorSetter);
 				}

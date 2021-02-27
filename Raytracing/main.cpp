@@ -23,7 +23,7 @@ void main_brice() {
 
 	std::vector<CPlan> myPlans;
 	//CPlan myplan0(NewVector(0, 0, 1000), NewVector(1000, 1000, 1000));
-	CPlan myPlan0(NewVector(500, 300, 500), NewVector(0, -1, 0), true); //Un point sur le plan et la normal au plan
+	CPlan myPlan0(NewVector(500, 300, 500), NewVector(1, 1, 0), true); //Un point sur le plan et la normal au plan
 	myPlans.push_back(myPlan0);
 
 	auto* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
