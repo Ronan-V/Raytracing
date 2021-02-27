@@ -37,12 +37,13 @@ Vector3D CSphere::get_intersection_coordinates(CRay ray)
 	}
 	else //det < 0 --> No intersection
 	{
+		this->hasIntersection = false;
 		return NewVector(0, 0, 0);
 	}
-
+	this->hasIntersection = true;
 	return rayOrigin + (t * rayDirection);
 }
 
 bool CSphere::has_intersection(CRay ray) {
-	return get_intersection_coordinates(ray) != NewVector(0, 0, 0);
+	return hasIntersection;
 }
