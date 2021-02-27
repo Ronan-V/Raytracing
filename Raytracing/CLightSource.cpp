@@ -11,13 +11,12 @@ void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBIT
 {
 	RGBQUAD colorGetter;
 	RGBQUAD colorSetter;
-	bool interOK; // bool intersection
 	float factor = sqrt(zScreen * zScreen + xScreen * xScreen);
 	factor /= 255;
 	for (long eachTuple = 0; eachTuple < visibility->size(); eachTuple++)
 	{
 
-		int luminosity = Distance(this->position, visibility->at(eachTuple).second, xScreen);
+		int luminosity = Distance(this->position, visibility->at(eachTuple).second);
 
 		int newFactor;
 		newFactor = luminosity / factor;
@@ -48,7 +47,37 @@ void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBIT
 	FreeImage_Save(FIF_BMP, image, "3d.bmp");
 }
 
-float CLightSource::Distance(Vector3D Light, Vector3D Intersection, short xScreen)
+float CLightSource::Distance(Vector3D Light, Vector3D Intersection)
 {
 	return DistanceVectors(Intersection, Light);
+}
+
+void CLightSource::ReflectedLight(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility)
+{
+	RGBQUAD colorSetter;
+
+	for (long eachTuple = 0; eachTuple < visibility->size(); eachTuple++)
+	{
+		Vector3D lightVector = visibility->at(eachTuple).second - this->position;
+		Vector3D NormalVector = lightVector * NewVector(0, lightVector.y, 0);
+		Vector3D ReflectedLight = ReflectedRay(lightVector, NormalVector);
+		//std::cout << " Coordonnees : ( " << visibility->at(eachTuple).second.x<< " ; " << visibility->at(eachTuple).second.y << " ; " << (int)visibility->at(eachTuple).second.z << " )                        Reflected Ray : ( " << ReflectedLight.x << " ; " << ReflectedLight.y << " ; " << (int)ReflectedLight.z << ")" << std::endl;
+
+		 // BLOC A REMPLACER PAR "SI INTERSECTION AU PLAN ECRAN (xScreen, yScreen) par rayon ReflectedLight" alors --les lignes dans le if--
+
+		/*while (visibility->at(eachTuple).second.z + ReflectedLight.z > 0) 
+		{
+			ReflectedLight.x = ReflectedLight.x - 1;
+			ReflectedLight.y = ReflectedLight.y - 1;
+			ReflectedLight.z = ReflectedLight.z - 1;
+		}
+		if ((0 < visibility->at(eachTuple).second.x + ReflectedLight.x < xScreen) and ( 0 < visibility->at(eachTuple).second.y + ReflectedLight.y < yScreen))
+		{
+			colorSetter.rgbRed = 255;
+			colorSetter.rgbGreen = 255;
+			colorSetter.rgbBlue = 255;
+			FreeImage_SetPixelColor(image, ReflectedLight.x, ReflectedLight.y, &colorSetter);
+		}*/
+	}
+	FreeImage_Save(FIF_BMP, image, "3dRef.bmp");
 }
