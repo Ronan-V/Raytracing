@@ -161,38 +161,34 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 				rayDist = DistanceVectors(myRay.get_position(), intersection);
 				if (object->has_intersection(myRay))
 				{
-					/*if (rayDist < intersectDist)
+					if (rayDist < intersectDist)
 					{
 						intersectDist = rayDist;
 						//Materiaux : Dire que l'objet intersecté est cet objet
+
+						switch (colorVariable) {
+						case 1:
+							red = 178;
+							green = 20;
+							blue = 31;
+							break;
+						case 2:
+							red = 27;
+							green = 120;
+							blue = 131;
+							break;
+						default:
+							red = 13;
+							green = 179;
+							blue = 93;
+							break;
+						}
+						colorSetter.rgbRed = red;
+						colorSetter.rgbGreen = green;
+						colorSetter.rgbBlue = blue;
+						visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
+						FreeImage_SetPixelColor(image, i, j, &colorSetter);
 					}
-					else
-					{
-						break;
-					}*/
-					switch (colorVariable) {
-					case 1:
-						red = 178;
-						green = 20;
-						blue = 31;
-						break;
-					case 2:
-						red = 27;
-						green = 120;
-						blue = 131;
-						break;
-					default:
-						red = 13;
-						green = 179;
-						blue = 93;
-						break;
-					}
-					colorSetter.rgbRed = red;
-					colorSetter.rgbGreen = green;
-					colorSetter.rgbBlue = blue;
-					visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
-					FreeImage_SetPixelColor(image, i, j, &colorSetter);
-					//break;
 				}
 			}
 			colorVariable = 0;

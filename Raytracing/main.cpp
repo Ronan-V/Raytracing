@@ -31,8 +31,6 @@ void main_brice() {
 	myScene.add_object(mySphere0);
 	myScene.add_object(myPlan0);
 
-	
-
 	auto* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
 	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, myPlans, visibility, myScene);
 }
