@@ -12,16 +12,18 @@ void main_brice() {
 	image = FreeImage_Allocate(xScreen, yScreen, 32);
 
 	std::vector<CSphere> mySpheres; // tableau de spheres
-	CSphere mysphere0(NewVector(500, 500, 300), 50); // creation sphere1
+	CSphere mysphere0(NewVector(0, 0, 10), 3); // creation sphere1
 	mySpheres.push_back(mysphere0); // ajout dans tableau
 
-	CCamera myCamera = CCamera(NewVector(500, 500, 500), 300, 300, 50);
+	CCamera myCamera = CCamera(NewVector(0, 2, -10), 4, 3, 1, mysphere0.get_position());
 	//CLightSource myLightSource(0, 1000, 0);
 
 	std::vector<CPlan> myPlans;
 	//CPlan myplan0(NewVector(0, 0, 1000), NewVector(1000, 1000, 1000));
-	CPlan myPlan0(NewVector(500, 300, 500), NewVector(1, 1, 0)); //Un point sur le plan et la normal au plan
+	CPlan myPlan0(NewVector(0, -2, 0), NewVector(0, 1, 0)); //Un point sur le plan et la normal au plan
 	myPlans.push_back(myPlan0);
+	//myPlans.push_back(myPlan1);
+	//myPlans.push_back(myPlan2);
 
 	auto* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
 	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, myPlans, visibility);
@@ -68,7 +70,7 @@ int main(int argc, char** argv)
 
 		// -------------------------- INIT CAMERA AND LIGHTS------------------------------
 
-		CCamera myCamera = CCamera(NewVector(0, 0, 0), 0.5, 0.35, 1);
+		CCamera myCamera = CCamera(NewVector(0, 0, 0), 0.5, 0.35, 1, mysphere0.get_position());
 		CLightSource myLightSource(0, 1000, 0);
 
 		// -------------------------- INIT PAIRS ------------------------------

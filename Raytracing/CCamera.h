@@ -57,7 +57,7 @@ public:
 	/// <param name="viewplaneWidth">The viewplane's width</param>
 	/// <param name="viewplaneHeight">The viewplane's height</param>
 	/// <param name="viewplaneDist">The distance between the camera and the viewplane</param>
-	CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist);
+	CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight, float viewplaneDist, Vector3D lookPosition);
 
 	/// <summary>
 	/// Calculates the normalised unit vector from the camera's position to a given pixel on viewplane
