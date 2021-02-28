@@ -43,7 +43,7 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 					colorSetter.rgbRed = 255;
 					colorSetter.rgbGreen = 0;
 					colorSetter.rgbBlue = 255;
-					//visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
+					visibility->push_back(std::tuple<RGBQUAD, Vector3D, int, int>(colorSetter, intersection, i, j));
 					FreeImage_SetPixelColor(image, i, j, &colorSetter);
 					break;
 				}

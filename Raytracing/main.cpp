@@ -46,10 +46,11 @@ int main(int argc, char** argv)
 
 		// -------------------------- INIT SPHERES-----------------------------
 
-		/* 4K
+
 		short xScreen = 3840, yScreen = 2160, zScreen = 3000;
 		image = FreeImage_Allocate(xScreen, yScreen, 32);
-		std::vector<CSphere> mySpheres; // tableau de spheres
+
+		/*std::vector<CSphere> mySpheres; // tableau de spheres
 		CSphere mysphere0(NewVector(950, 1575, 500), 600); // creation sphere0
 		CSphere mysphere1(NewVector(1900, 1050, 1500), 600); // creation sphere1
 		CSphere mysphere2(NewVector(2850, 525, 2500), 600); // creation sphere2
@@ -62,16 +63,10 @@ int main(int argc, char** argv)
 		mySpheres.push_back(mysphere4); // ajout dans tableau
 		*/
 
-		//Reflected Light
-		short xScreen = 1000, yScreen = 1000, zScreen = 1000;
-		image = FreeImage_Allocate(xScreen, yScreen, 32);
-		std::vector<CSphere> mySpheres; // tableau de spheres
-		CSphere mysphere0(NewVector(500, 500, 500), 250); // creation sphere0
-		mySpheres.push_back(mysphere0); // ajout dans tableau
 
 		// -------------------------- INIT CAMERA AND LIGHTS------------------------------
 
-		CCamera myCamera = CCamera(NewVector(0, 0, 0), 0.5, 0.35, 1, mysphere0.get_position());
+		CCamera myCamera = CCamera();
 		CLightSource myLightSource = utils.get_light_sources()[0];
 
 		// -------------------------- INIT PAIRS ------------------------------
@@ -86,7 +81,6 @@ int main(int argc, char** argv)
 		// -------------------------- MAIN FUNCTIONS------------------------------
 
 		myCamera.Iradiate(xScreen, yScreen, zScreen, image, utils.get_spheres(), visibility);
-
 		myLightSource.Illuminate(xScreen, yScreen, zScreen, image, visibility);
 	}
 }

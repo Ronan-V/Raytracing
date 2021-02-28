@@ -88,10 +88,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="example.txt">
+    <Text Include="config.txt">
       <Filter>Fichiers de ressources</Filter>
     </Text>
-    <Text Include="config.txt">
+    <Text Include="example_with_relief.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
+    <Text Include="example_normal.txt">
       <Filter>Fichiers de ressources</Filter>
     </Text>
   </ItemGroup>

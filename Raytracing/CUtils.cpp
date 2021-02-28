@@ -132,7 +132,7 @@ void CUtils::initialise_configuration(std::vector<std::string> p_configuration) 
 			{
 				ret = new CPlan(parse_vector3D_from_line(p_configuration[i + 1]), parse_vector3D_from_line(p_configuration[i + 2]));
 			}
-			else if (p_configuration[0] == "sphere")
+			else if (p_configuration[i] == "sphere")
 			{
 				ret = new CSphere(parse_vector3D_from_line(p_configuration[i + 1]), stof(p_configuration[i + 2]));
 				this->spheres.push_back(CSphere(parse_vector3D_from_line(p_configuration[i + 1]), stof(p_configuration[i + 2])));
