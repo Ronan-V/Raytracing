@@ -177,10 +177,25 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 							green = 120;
 							blue = 131;
 							break;
+						case 3:
+							red = 57;
+							green = 50;
+							blue = 31;
+							break;
+						case 4:
+							red = 200;
+							green = 120;
+							blue = 11;
+							break;
+						case 5:
+							red = 1;
+							green = 200;
+							blue = 90;
+							break;
 						default:
-							red = 13;
-							green = 179;
-							blue = 93;
+							red = 70;
+							green = 70;
+							blue = 70;
 							break;
 						}
 						colorSetter.rgbRed = red;

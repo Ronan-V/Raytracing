@@ -23,13 +23,21 @@ void main_brice() {
 	std::vector<CPlan> myPlans;
 	//CPlan myplan0(NewVector(0, 0, 1000), NewVector(1000, 1000, 1000));
 	//CPlan myPlan0(NewVector(0, -2, 0), NewVector(0, 1, 0)); //Un point sur le plan et la normal au plan
-	CPlan* myPlan0 = new CPlan(NewVector(0, -2, 0), NewVector(0, 1, 0));
+	CPlan* myPlan0 = new CPlan(NewVector(0, -5, 0), NewVector(0, 1, 0));
+	CPlan* myPlan1 = new CPlan(NewVector(-5, 0, 0), NewVector(1, 0, 0));
+	CPlan* myPlan2 = new CPlan(NewVector(5, 0, 0), NewVector(1, 0, 0));
+	CPlan* myPlan3 = new CPlan(NewVector(0, 0, 20), NewVector(0, 0, 1));
+	CPlan* myPlan4 = new CPlan(NewVector(0, 5, 0), NewVector(0, 1, 0));
 	//myPlans.push_back(myPlan0);
 	//myPlans.push_back(myPlan1);
 	//myPlans.push_back(myPlan2);
 	CScene myScene;
 	myScene.add_object(mySphere0);
 	myScene.add_object(myPlan0);
+	myScene.add_object(myPlan1);
+	myScene.add_object(myPlan2);
+	myScene.add_object(myPlan3);
+	myScene.add_object(myPlan4);
 
 	auto* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
 	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, myPlans, visibility, myScene);
