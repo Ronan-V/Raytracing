@@ -72,6 +72,6 @@ public:
 	Vector3D calculate_normalised_unit_vector(float x, float y, float xRes, float yRes);
 
 	//TODO documentation
-	void Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility);
-	void IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::pair<RGBQUAD, Vector3D>>* visibility, CScene& scene);
+	void Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility);
+	void IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility, CScene& scene);
 };
