@@ -1,22 +1,12 @@
-#include "CScene.h"
-
-CScene::CScene()
-{
-	nbObjects = 0;
-}
-
-CScene::~CScene()
-{
-}
+﻿#include "CScene.h"
 
 int CScene::get_nb_objects()
 {
-	return nbObjects;
+	return myObjects.size();
 }
 
 void CScene::add_object(CIntersectionObject* object)
 {
-	nbObjects++;
 	myObjects.push_back(object);
 }
 
