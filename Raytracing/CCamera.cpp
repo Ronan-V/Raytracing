@@ -20,7 +20,7 @@ CCamera::CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight,
 	
 }
 
-void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility) //CCamera camera
+void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility) //CCamera camera
 {
 	RGBQUAD colorSetter;
 
@@ -43,7 +43,7 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 					colorSetter.rgbRed = 255;
 					colorSetter.rgbGreen = 0;
 					colorSetter.rgbBlue = 255;
-					visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
+					//visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
 					FreeImage_SetPixelColor(image, i, j, &colorSetter);
 					break;
 				}
@@ -64,7 +64,7 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 /// <param name="mySpheres"></param>
 /// <param name="visibility"></param>
 /// <param name="camera"></param>
-void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility, CScene& scene) //CCamera camera
+void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility, CScene& scene) //CCamera camera
 {
 	RGBQUAD colorSetter;
 	int colorVariable = 0;
@@ -201,7 +201,7 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 						colorSetter.rgbRed = red;
 						colorSetter.rgbGreen = green;
 						colorSetter.rgbBlue = blue;
-						visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
+						visibility->push_back(std::tuple<RGBQUAD, Vector3D, int, int>(colorSetter, intersection, i, j));
 						FreeImage_SetPixelColor(image, i, j, &colorSetter);
 					}
 				}

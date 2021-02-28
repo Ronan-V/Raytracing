@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 #include <math.h>
+#include <tuple>
 
 struct Vector3D {
 	float x;
