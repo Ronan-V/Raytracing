@@ -12,37 +12,20 @@ void main_brice() {
 	short xScreen = 1000, yScreen = 1000, zScreen = 1000;
 	image = FreeImage_Allocate(xScreen, yScreen, 32);
 
-	std::vector<CSphere> mySpheres; // tableau de spheres
-	//CSphere mysphere0(NewVector(0, 0, 10), 3); // creation sphere1
-	CSphere* mySphere0 = new CSphere(NewVector(0, 0, 10), 3);
-	//mySpheres.push_back(mysphere0); // ajout dans tableau
 
-	CCamera myCamera = CCamera(NewVector(0, 2, -10), 4, 3, 1, mySphere0->get_position());
-	CLightSource myLightSource(0, 10, 10);
+	//CSphere* mySphere0 = new CSphere(NewVector(0, 100, 500), 200);
 
-	std::vector<CPlan> myPlans;
-	//CPlan myplan0(NewVector(0, 0, 1000), NewVector(1000, 1000, 1000));
-	//CPlan myPlan0(NewVector(0, -2, 0), NewVector(0, 1, 0)); //Un point sur le plan et la normal au plan
-	CPlan* myPlan0 = new CPlan(NewVector(0, -5, 0), NewVector(0, 1, 0));
-	CPlan* myPlan1 = new CPlan(NewVector(-5, 0, 0), NewVector(1, 0, 0));
-	CPlan* myPlan2 = new CPlan(NewVector(5, 0, 0), NewVector(1, 0, 0));
-	CPlan* myPlan3 = new CPlan(NewVector(0, 0, 20), NewVector(0, 0, 1));
-	CPlan* myPlan4 = new CPlan(NewVector(0, 5, 0), NewVector(0, 1, 0));
-	//myPlans.push_back(myPlan0);
-	//myPlans.push_back(myPlan1);
-	//myPlans.push_back(myPlan2);
+	//CLightSource myLightSource(0, 300, 0);
+
+	//CPlan* myPlan0 = new CPlan(NewVector(0, -500, 0), NewVector(0, 1, 0));
+
 	CScene myScene;
-	myScene.add_object(mySphere0);
-	/*myScene.add_object(myPlan0);
-	myScene.add_object(myPlan1);
-	myScene.add_object(myPlan2);
-	myScene.add_object(myPlan3);
-	myScene.add_object(myPlan4);*/
+	CCamera myCamera = CCamera(NewVector(0, 2, -10), 4, 3, 1, myScene.get_objects_array()[0]->get_position());
 
 	auto* visibility = new std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>();
-	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, myPlans, visibility, myScene);
-	myLightSource.Illuminate(xScreen, yScreen, zScreen, image, visibility);
-	myLightSource.ReflectedLight(xScreen, yScreen, zScreen, image, visibility);
+	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, visibility, myScene);
+	//myLightSource.Illuminate(xScreen, yScreen, zScreen, image, visibility);
+	//myLightSource.ReflectedLight(xScreen, yScreen, zScreen, image, visibility);
 }
 
 int main(int argc, char** argv)
@@ -87,7 +70,7 @@ int main(int argc, char** argv)
 		// -------------------------- INIT CAMERA AND LIGHTS------------------------------
 
 		CCamera myCamera = CCamera(NewVector(0, 0, 0), 0.5, 0.35, 1, mysphere0.get_position());
-		CLightSource myLightSource(0, 1000, 0);
+		CLightSource myLightSource(0, 1500, 0);
 
 		// -------------------------- INIT PAIRS ------------------------------
 

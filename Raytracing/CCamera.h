@@ -73,5 +73,5 @@ public:
 
 	//TODO documentation
 	void Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility);
-	void IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility, CScene& scene);
+	void IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility, CScene& scene);
 };

@@ -40,9 +40,9 @@ void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBIT
 		colorGetter.rgbBlue = std::get<0>(eachTuple).rgbBlue;
 
 		int newRed, newGreen, newBlue;
-		newRed = colorGetter.rgbRed - luminosity;
-		newGreen = colorGetter.rgbGreen - luminosity;
-		newBlue = colorGetter.rgbBlue - luminosity;
+		newRed = colorGetter.rgbRed - newFactor;
+		newGreen = colorGetter.rgbGreen - newFactor;
+		newBlue = colorGetter.rgbBlue - newFactor;
 
 		if (newRed < 0) { newRed = 0; };
 		if (newGreen < 0) { newGreen = 0; };
