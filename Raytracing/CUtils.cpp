@@ -21,9 +21,14 @@ std::vector<CIntersectionObject*> CUtils::get_objects()
 	return this->objects;
 }
 
-std::vector<CLightSource*> CUtils::get_light_sources()
+std::vector<CLightSource> CUtils::get_light_sources()
 {
 	return this->light_sources;
+}
+
+std::vector<CSphere> CUtils::get_spheres()
+{
+	return this->spheres;
 }
 
 bool CUtils::get_isRelief()
@@ -98,7 +103,8 @@ Vector3D CUtils::parse_vector3D_from_line(std::string s) {
 /// <param name="p_configuration"></param>
 void CUtils::initialise_configuration(std::vector<std::string> p_configuration) {
 	this->objects = std::vector<CIntersectionObject*>();
-	this->light_sources = std::vector<CLightSource*>();
+	this->light_sources = std::vector<CLightSource>();
+	this->spheres = std::vector<CSphere>();
 	this->isRelief = false;
 
 	if (p_configuration[0] == "relief" && p_configuration[1] == "true")
@@ -117,7 +123,7 @@ void CUtils::initialise_configuration(std::vector<std::string> p_configuration) 
 		CIntersectionObject* ret;
 		if (p_configuration[i] == "lightSource")
 		{
-			CLightSource* light = new CLightSource(parse_vector3D_from_line(p_configuration[i + 1]));
+			CLightSource light = CLightSource(parse_vector3D_from_line(p_configuration[i + 1]));
 			this->light_sources.push_back(light);
 			i += 2;
 		}
@@ -129,6 +135,7 @@ void CUtils::initialise_configuration(std::vector<std::string> p_configuration) 
 			else if (p_configuration[0] == "sphere")
 			{
 				ret = new CSphere(parse_vector3D_from_line(p_configuration[i + 1]), stof(p_configuration[i + 2]));
+				this->spheres.push_back(CSphere(parse_vector3D_from_line(p_configuration[i + 1]), stof(p_configuration[i + 2])));
 			}
 			else
 			{

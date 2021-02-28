@@ -6,8 +6,9 @@
 #include <utility>
 #include "CPlan.h"
 #include "CScene.h"
+#include "CUtils.h"
 
-void main_brice() {
+void main_brice(std::vector<CIntersectionObject*> objects) {
 	FIBITMAP* image;
 	short xScreen = 1000, yScreen = 1000, zScreen = 1000;
 	image = FreeImage_Allocate(xScreen, yScreen, 32);
@@ -20,6 +21,11 @@ void main_brice() {
 	//CPlan* myPlan0 = new CPlan(NewVector(0, -500, 0), NewVector(0, 1, 0));
 
 	CScene myScene;
+	for (CIntersectionObject* o : objects)
+	{
+		myScene.add_object(o);
+	}
+
 	CCamera myCamera = CCamera(NewVector(0, 2, -10), 4, 3, 1, myScene.get_objects_array()[0]->get_position());
 
 	auto* visibility = new std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>();
@@ -30,10 +36,10 @@ void main_brice() {
 
 int main(int argc, char** argv)
 {
-
-	if (true)
+	CUtils utils = CUtils("config.txt");
+	if (utils.get_isRelief())
 	{
-		main_brice();
+		main_brice(utils.get_objects());
 	}
 	else
 	{
@@ -70,7 +76,7 @@ int main(int argc, char** argv)
 		// -------------------------- INIT CAMERA AND LIGHTS------------------------------
 
 		CCamera myCamera = CCamera(NewVector(0, 0, 0), 0.5, 0.35, 1, mysphere0.get_position());
-		CLightSource myLightSource(0, 1500, 0);
+		CLightSource myLightSource = utils.get_light_sources()[0];
 
 		// -------------------------- INIT PAIRS ------------------------------
 
@@ -83,7 +89,8 @@ int main(int argc, char** argv)
 
 		// -------------------------- MAIN FUNCTIONS------------------------------
 
-		myCamera.Iradiate(xScreen, yScreen, zScreen, image, mySpheres, visibility);
+		myCamera.Iradiate(xScreen, yScreen, zScreen, image, utils.get_spheres(), visibility);
+
 		myLightSource.Illuminate(xScreen, yScreen, zScreen, image, visibility);
 		myLightSource.ReflectedLight(xScreen, yScreen, zScreen, image, visibility);
 	}
