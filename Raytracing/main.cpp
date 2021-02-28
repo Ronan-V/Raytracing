@@ -5,6 +5,7 @@
 #include <vector>
 #include <utility>
 #include "CPlan.h"
+#include "CScene.h"
 
 void main_brice() {
 	FIBITMAP* image;
@@ -12,21 +13,28 @@ void main_brice() {
 	image = FreeImage_Allocate(xScreen, yScreen, 32);
 
 	std::vector<CSphere> mySpheres; // tableau de spheres
-	CSphere mysphere0(NewVector(0, 0, 10), 3); // creation sphere1
-	mySpheres.push_back(mysphere0); // ajout dans tableau
+	//CSphere mysphere0(NewVector(0, 0, 10), 3); // creation sphere1
+	CSphere* mySphere0 = new CSphere(NewVector(0, 0, 10), 3);
+	//mySpheres.push_back(mysphere0); // ajout dans tableau
 
-	CCamera myCamera = CCamera(NewVector(0, 2, -10), 4, 3, 1, mysphere0.get_position());
+	CCamera myCamera = CCamera(NewVector(0, 2, -10), 4, 3, 1, mySphere0->get_position());
 	//CLightSource myLightSource(0, 1000, 0);
 
 	std::vector<CPlan> myPlans;
 	//CPlan myplan0(NewVector(0, 0, 1000), NewVector(1000, 1000, 1000));
-	CPlan myPlan0(NewVector(0, -2, 0), NewVector(0, 1, 0)); //Un point sur le plan et la normal au plan
-	myPlans.push_back(myPlan0);
+	//CPlan myPlan0(NewVector(0, -2, 0), NewVector(0, 1, 0)); //Un point sur le plan et la normal au plan
+	CPlan* myPlan0 = new CPlan(NewVector(0, -2, 0), NewVector(0, 1, 0));
+	//myPlans.push_back(myPlan0);
 	//myPlans.push_back(myPlan1);
 	//myPlans.push_back(myPlan2);
+	CScene myScene;
+	myScene.add_object(mySphere0);
+	myScene.add_object(myPlan0);
+
+	
 
 	auto* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
-	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, myPlans, visibility);
+	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, myPlans, visibility, myScene);
 }
 
 int main(int argc, char** argv)

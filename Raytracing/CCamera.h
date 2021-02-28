@@ -4,6 +4,7 @@
 #include <vector>
 #include "CSphere.h"
 #include "CPlan.h"
+#include "CScene.h"
 
 /// <summary>
 /// This class represents a camera
@@ -71,5 +72,5 @@ public:
 
 	//TODO documentation
 	void Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility);
-	void IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::pair<RGBQUAD, Vector3D>>* visibility);
+	void IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::pair<RGBQUAD, Vector3D>>* visibility, CScene& scene);
 };

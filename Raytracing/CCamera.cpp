@@ -64,10 +64,10 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 /// <param name="mySpheres"></param>
 /// <param name="visibility"></param>
 /// <param name="camera"></param>
-void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility) //CCamera camera
+void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<CPlan> myPlans, std::vector<std::pair <RGBQUAD, Vector3D>>* visibility, CScene& scene) //CCamera camera
 {
 	RGBQUAD colorSetter;
-	int test = 0;
+	int colorVariable = 0;
 	int red = 0;
 	int green = 0;
 	int blue = 0;
@@ -85,7 +85,7 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 			colorSetter.rgbGreen = 0;
 			colorSetter.rgbBlue = 0;
 
-			for (CPlan plan : myPlans)
+			/*for (CPlan plan : myPlans)
 			{
 				test++;
 				Vector3D intersection = plan.get_intersection_coordinates(myRay);
@@ -100,7 +100,7 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 					else
 					{
 						break;
-					}*/
+					}
 					switch (test) {
 					case 1:
 						red = 178;
@@ -143,7 +143,7 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 					else
 					{
 						break;
-					}*/
+					}
 					colorSetter.rgbRed = 255;
 					colorSetter.rgbGreen = 255;
 					colorSetter.rgbBlue = 255;
@@ -151,7 +151,51 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 					FreeImage_SetPixelColor(image, i, j, &colorSetter);
 					//break;
 				}
+			}*/
+
+			std::vector<CIntersectionObject*> objectsArray = scene.get_objects_array();
+			for (CIntersectionObject* object : objectsArray)
+			{
+				colorVariable++;
+				Vector3D intersection = object->get_intersection_coordinates(myRay);
+				rayDist = DistanceVectors(myRay.get_position(), intersection);
+				if (object->has_intersection(myRay))
+				{
+					/*if (rayDist < intersectDist)
+					{
+						intersectDist = rayDist;
+						//Materiaux : Dire que l'objet intersecté est cet objet
+					}
+					else
+					{
+						break;
+					}*/
+					switch (colorVariable) {
+					case 1:
+						red = 178;
+						green = 20;
+						blue = 31;
+						break;
+					case 2:
+						red = 27;
+						green = 120;
+						blue = 131;
+						break;
+					default:
+						red = 13;
+						green = 179;
+						blue = 93;
+						break;
+					}
+					colorSetter.rgbRed = red;
+					colorSetter.rgbGreen = green;
+					colorSetter.rgbBlue = blue;
+					visibility->push_back(std::pair <RGBQUAD, Vector3D>(colorSetter, intersection));
+					FreeImage_SetPixelColor(image, i, j, &colorSetter);
+					//break;
+				}
 			}
+			colorVariable = 0;
 		}
 	}
 	std::cout << "nombre de couples pixel:vecteur : " << visibility->size() << std::endl << std::endl;
