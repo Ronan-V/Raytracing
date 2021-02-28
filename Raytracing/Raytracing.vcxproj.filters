@@ -87,4 +87,12 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="example.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
+    <Text Include="config.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

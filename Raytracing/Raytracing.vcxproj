@@ -169,6 +169,10 @@
     <ClInclude Include="CUtils.h" />
     <ClInclude Include="maths.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="config.txt" />
+    <Text Include="example.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

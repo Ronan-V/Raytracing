@@ -17,7 +17,7 @@ CCamera::CCamera(Vector3D position, float viewplaneWidth, float viewplaneHeight,
 	this->rightVec = upVec * vecDir;
 	this->upVec = vecDir * rightVec;
 	this->topLeftPos = this->position + ((viewplaneDist * vecDir) + ((viewplaneHeight / 2) * upVec)) - ((viewplaneWidth / 2) * rightVec);
-	
+
 }
 
 void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<CSphere> mySpheres, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility) //CCamera camera
@@ -50,8 +50,6 @@ void CCamera::Iradiate(short xScreen, short yScreen, short zScreen, FIBITMAP* im
 			}
 		}
 	}
-	std::cout << "nombre de couples pixel:vecteur : " << visibility->size() << std::endl << std::endl;
-	FreeImage_Save(FIF_BMP, image, "2d.bmp");
 }
 
 /// <summary>
@@ -141,6 +139,4 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 			colorVariable = 0;
 		}
 	}
-	std::cout << "nombre de couples pixel:vecteur : " << visibility->size() << std::endl << std::endl;
-	FreeImage_Save(FIF_BMP, image, "out_brice.bmp");
 }

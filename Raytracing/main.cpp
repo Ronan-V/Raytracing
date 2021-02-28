@@ -8,15 +8,12 @@
 #include "CScene.h"
 #include "CUtils.h"
 
-void main_brice(std::vector<CIntersectionObject*> objects) {
+void main_brice(std::vector<CIntersectionObject*> objects, std::vector<CLightSource> light_sources) {
 	FIBITMAP* image;
 	short xScreen = 1000, yScreen = 1000, zScreen = 1000;
 	image = FreeImage_Allocate(xScreen, yScreen, 32);
 
-
-	//CSphere* mySphere0 = new CSphere(NewVector(0, 100, 500), 200);
-
-	//CLightSource myLightSource(0, 300, 0);
+	CLightSource myLightSource = light_sources[0];
 
 	//CPlan* myPlan0 = new CPlan(NewVector(0, -500, 0), NewVector(0, 1, 0));
 
@@ -30,8 +27,7 @@ void main_brice(std::vector<CIntersectionObject*> objects) {
 
 	auto* visibility = new std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>();
 	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, visibility, myScene);
-	//myLightSource.Illuminate(xScreen, yScreen, zScreen, image, visibility);
-	//myLightSource.ReflectedLight(xScreen, yScreen, zScreen, image, visibility);
+	myLightSource.Illuminate(xScreen, yScreen, zScreen, image, visibility);
 }
 
 int main(int argc, char** argv)
@@ -39,7 +35,7 @@ int main(int argc, char** argv)
 	CUtils utils = CUtils("config.txt");
 	if (utils.get_isRelief())
 	{
-		main_brice(utils.get_objects());
+		main_brice(utils.get_objects(), utils.get_light_sources());
 	}
 	else
 	{
@@ -92,6 +88,5 @@ int main(int argc, char** argv)
 		myCamera.Iradiate(xScreen, yScreen, zScreen, image, utils.get_spheres(), visibility);
 
 		myLightSource.Illuminate(xScreen, yScreen, zScreen, image, visibility);
-		myLightSource.ReflectedLight(xScreen, yScreen, zScreen, image, visibility);
 	}
 }
