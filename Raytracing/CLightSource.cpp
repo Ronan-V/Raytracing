@@ -15,7 +15,10 @@ void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBIT
 	factor /= 255;
 	for (long eachTuple = 0; eachTuple < visibility->size(); eachTuple++)
 	{
-
+		if (visibility->at(eachTuple).second.x == 500 && visibility->at(eachTuple).second.y == 500)
+		{
+			std::cout << "trace";
+		}
 		int luminosity = DistanceVectors(this->position, visibility->at(eachTuple).second);
 
 		int newFactor;

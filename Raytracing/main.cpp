@@ -18,7 +18,7 @@ void main_brice() {
 	//mySpheres.push_back(mysphere0); // ajout dans tableau
 
 	CCamera myCamera = CCamera(NewVector(0, 2, -10), 4, 3, 1, mySphere0->get_position());
-	//CLightSource myLightSource(0, 1000, 0);
+	CLightSource myLightSource(0, 1, 10);
 
 	std::vector<CPlan> myPlans;
 	//CPlan myplan0(NewVector(0, 0, 1000), NewVector(1000, 1000, 1000));
@@ -33,14 +33,16 @@ void main_brice() {
 	//myPlans.push_back(myPlan2);
 	CScene myScene;
 	myScene.add_object(mySphere0);
-	myScene.add_object(myPlan0);
+	/*myScene.add_object(myPlan0);
 	myScene.add_object(myPlan1);
 	myScene.add_object(myPlan2);
 	myScene.add_object(myPlan3);
-	myScene.add_object(myPlan4);
+	myScene.add_object(myPlan4);*/
 
 	auto* visibility = new std::vector<std::pair <RGBQUAD, Vector3D>>();
 	myCamera.IradiateBrice(xScreen, yScreen, zScreen, image, mySpheres, myPlans, visibility, myScene);
+	myLightSource.Illuminate(xScreen, yScreen, zScreen, image, visibility);
+	myLightSource.ReflectedLight(xScreen, yScreen, zScreen, image, visibility);
 }
 
 int main(int argc, char** argv)
