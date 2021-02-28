@@ -1,8 +1,0 @@
-﻿relief false
-6
-lightSource 0,1000,0
-sphere 950,1575,500 600
-sphere 1900,1050,1500 600
-sphere 2850,525,2500 600
-sphere 2400,1400,2800 600
-sphere 800,800,2800 600
