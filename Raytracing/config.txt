@@ -1,6 +1,5 @@
 relief true
-
-2
-
-sphere 1.3,2.4,0 10
+3
+sphere 1.3,2.4,0
+lightSource 1,2.34,1
 plan 12,2.4,0 10.3,20.4,010

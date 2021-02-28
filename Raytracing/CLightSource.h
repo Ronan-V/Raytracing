@@ -13,6 +13,7 @@ public:
 	~CLightSource() = default;
 
 	CLightSource(short x, short y, short z);
+	CLightSource(Vector3D position);
 	void Illuminate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility);
 	void ReflectedLight(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility);
 };

@@ -21,6 +21,11 @@ std::vector<CIntersectionObject*> CUtils::get_objects()
 	return this->objects;
 }
 
+std::vector<CLightSource*> CUtils::get_light_sources()
+{
+	return this->light_sources;
+}
+
 bool CUtils::get_isRelief()
 {
 	return this->isRelief;
@@ -87,32 +92,13 @@ Vector3D CUtils::parse_vector3D_from_line(std::string s) {
 	return NewVector(stof(coordinates[0]), stof(coordinates[1]), stof(coordinates[2]));
 }
 
-CIntersectionObject* CUtils::get_object_from_parsed_line(std::vector<std::string> parsed_line) {
-	CIntersectionObject* ret;
-
-	if (parsed_line[0] == "plan")
-	{
-		ret = new CPlan(parse_vector3D_from_line(parsed_line[1]), parse_vector3D_from_line(parsed_line[2]));
-	}
-	else if (parsed_line[0] == "sphere")
-	{
-		ret = new CSphere(parse_vector3D_from_line(parsed_line[1]), stof(parsed_line[2]));
-	}
-	else
-	{
-		std::cerr << "Error, object type not recognised '" << parsed_line[0] << "'" << std::endl;
-		return nullptr;
-	}
-
-	return ret;
-}
-
 /// <summary>
 /// Initialises the class members
 /// </summary>
 /// <param name="p_configuration"></param>
 void CUtils::initialise_configuration(std::vector<std::string> p_configuration) {
 	this->objects = std::vector<CIntersectionObject*>();
+	this->light_sources = std::vector<CLightSource*>();
 	this->isRelief = false;
 
 	if (p_configuration[0] == "relief" && p_configuration[1] == "true")
@@ -124,22 +110,34 @@ void CUtils::initialise_configuration(std::vector<std::string> p_configuration) 
 
 	p_configuration.erase(p_configuration.begin(), p_configuration.begin() + 3);
 
-	for (int i = 0; i < nbObjects * 3; i += 3)
+	int i = 0;
+	int objectsDone = 0;
+	while (objectsDone < nbObjects && i < p_configuration.size())
 	{
-		//std::vector<std::string> parsed_line = parse_line(" ", p_configuration[i]);
 		CIntersectionObject* ret;
-		if (p_configuration[i] == "plan")
+		if (p_configuration[i] == "lightSource")
 		{
-			ret = new CPlan(parse_vector3D_from_line(p_configuration[i + 1]), parse_vector3D_from_line(p_configuration[i + 2]));
+			CLightSource* light = new CLightSource(parse_vector3D_from_line(p_configuration[i + 1]));
+			this->light_sources.push_back(light);
+			i += 2;
 		}
-		else if (p_configuration[0] == "sphere")
-		{
-			ret = new CSphere(parse_vector3D_from_line(p_configuration[i + 1]), stof(p_configuration[i + 2]));
+		else {
+			if (p_configuration[i] == "plan")
+			{
+				ret = new CPlan(parse_vector3D_from_line(p_configuration[i + 1]), parse_vector3D_from_line(p_configuration[i + 2]));
+			}
+			else if (p_configuration[0] == "sphere")
+			{
+				ret = new CSphere(parse_vector3D_from_line(p_configuration[i + 1]), stof(p_configuration[i + 2]));
+			}
+			else
+			{
+				std::cerr << "Error, object type not recognised '" << p_configuration[i] << "'" << std::endl;
+				break;
+			}
+			i += 3;
+			this->objects.push_back(ret);
 		}
-		else
-		{
-			std::cerr << "Error, object type not recognised '" << p_configuration[i] << "'" << std::endl;
-		}
-		this->objects.push_back(ret);
+		objectsDone++;
 	}
 }

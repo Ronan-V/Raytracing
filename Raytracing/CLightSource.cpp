@@ -7,6 +7,10 @@ CLightSource::CLightSource(short x, short y, short z) : CObject(NewVector(x, y, 
 {
 }
 
+CLightSource::CLightSource(Vector3D position) : CObject(position)
+{
+}
+
 void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility)
 {
 	RGBQUAD colorGetter;
@@ -60,7 +64,7 @@ void CLightSource::ReflectedLight(short xScreen, short yScreen, short zScreen, F
 
 	for (long eachTuple = 0; eachTuple < visibility->size(); eachTuple++)
 	{
-		Vector3D lightVector = std::get<1>(visibility->at(eachTuple))- this->position;
+		Vector3D lightVector = std::get<1>(visibility->at(eachTuple)) - this->position;
 		Vector3D NormalVector = lightVector * NewVector(0, lightVector.y, 0);
 		Vector3D ReflectedLight = ReflectedRay(lightVector, NormalVector);
 		//std::cout << " Coordonnees : ( " << visibility->at(eachTuple).second.x<< " ; " << visibility->at(eachTuple).second.y << " ; " << (int)visibility->at(eachTuple).second.z << " )                        Reflected Ray : ( " << ReflectedLight.x << " ; " << ReflectedLight.y << " ; " << (int)ReflectedLight.z << ")" << std::endl;
