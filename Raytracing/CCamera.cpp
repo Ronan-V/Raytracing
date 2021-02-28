@@ -132,7 +132,6 @@ void CCamera::IradiateBrice(short xScreen, short yScreen, short zScreen, FIBITMA
 						colorSetter.rgbGreen = green;
 						colorSetter.rgbBlue = blue;
 						visibility->push_back(std::tuple<RGBQUAD, Vector3D, int, int>(colorSetter, intersection, i, j));
-						FreeImage_SetPixelColor(image, i, j, &colorSetter);
 					}
 				}
 			}

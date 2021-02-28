@@ -55,7 +55,7 @@ void CLightSource::Illuminate(short xScreen, short yScreen, short zScreen, FIBIT
 
 		FreeImage_SetPixelColor(image, std::get<2>(eachTuple), std::get<3>(eachTuple), &colorSetter);
 	}
-	FreeImage_Save(FIF_BMP, image, "3d.bmp");
+	FreeImage_Save(FIF_BMP, image, "Images/3d.bmp");
 }
 
 void CLightSource::ReflectedLight(short xScreen, short yScreen, short zScreen, FIBITMAP* image, std::vector<std::tuple <RGBQUAD, Vector3D, int, int>>* visibility)
@@ -85,5 +85,5 @@ void CLightSource::ReflectedLight(short xScreen, short yScreen, short zScreen, F
 			FreeImage_SetPixelColor(image, ReflectedLight.x, ReflectedLight.y, &colorSetter);
 		}*/
 	}
-	FreeImage_Save(FIF_BMP, image, "3dRef.bmp");
+	FreeImage_Save(FIF_BMP, image, "Images/3dRef.bmp");
 }
